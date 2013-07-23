@@ -10,6 +10,8 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'haml'
+
+gem 'bootstrap-sass'
 # gem 'ruby-debug19'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
