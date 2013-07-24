@@ -8,6 +8,8 @@
         %th Rating
         %th Release Date
         %th More Info
+        %th Edit Movie
+        %th Delete
     %tbody
       - @movies.each do |movie|
         %tr
@@ -15,5 +17,7 @@
           %td= movie.rating
           %td= movie.release_date.strftime("%B %d, %Y")
           %td= link_to "More about #{movie.title}", movie_path(movie)
+          %td= link_to "Edit #{movie.title}", edit_movie_path(movie)
+          %td= link_to "Delete", movie_path(movie), method: :delete, confirm: "Are you sure?", class: "btn btn-mini"
 
-  = link_to "Add new movie", new_movie_path, class: "btn"
+  = link_to "Add new movie", new_movie_path
