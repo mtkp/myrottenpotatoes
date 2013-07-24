@@ -1,18 +1,19 @@
-%h2 All Movies
+.span12
+  %h2 All Movies
 
-%table.table
-  %thead
-    %tr
-      %th Movie Title
-      %th Rating
-      %th Release Date
-      %th More Info
-  %tbody
-    - @movies.each do |movie|
+  %table.table
+    %thead
       %tr
-        %td= movie.title
-        %td= movie.rating
-        %td= movie.release_date.strftime("%B %d, %Y")
-        %td= link_to "More about #{movie.title}", movie_path(movie)
+        %th Movie Title
+        %th Rating
+        %th Release Date
+        %th More Info
+    %tbody
+      - @movies.each do |movie|
+        %tr
+          %td= movie.title
+          %td= movie.rating
+          %td= movie.release_date.strftime("%B %d, %Y")
+          %td= link_to "More about #{movie.title}", movie_path(movie)
 
-= link_to "Add new movie", new_movie_path, class: "btn"
+  = link_to "Add new movie", new_movie_path, class: "btn"
