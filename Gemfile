@@ -13,6 +13,17 @@ gem 'jbuilder', '~> 1.2'
 gem 'haml'
 gem 'pg'
 
+group :test do
+  gem 'cucumber-rails', git: 'https://github.com/cucumber/cucumber-rails.git', branch: 'master_rails4_test'
+end
+
+group :test, :development do
+  gem 'cucumber-rails-training-wheels'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'launchy'
+end
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

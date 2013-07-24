@@ -35,7 +35,7 @@ development:
   password:
   host: localhost
 
-test:
+test: &test
   adapter: postgresql
   encoding: unicode
   database: rp-test
@@ -43,3 +43,5 @@ test:
   username: matk
   password:
   host: localhost
+cucumber:
+  <<: *test
