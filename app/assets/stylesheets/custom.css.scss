@@ -13,7 +13,8 @@ form {
   display: block;
 }
 input, input[type="text"], textarea, select, .uneditable-input {
-  width: 100%;
+  width: 30%;
   height: auto;
   @include box-sizing;
+  display: block;
 }
