@@ -1,11 +1,12 @@
 class MoviesController < ApplicationController
 
   def index
-    @movies = Movie.all
+    @movies = Movie.order(:title)
   end
 
   def show
-    @movie = Movie.find params[:id]
+    @movie = Movie.find_by_id params[:id]
+    redirect_to movies_path unless @movie
   end
 
   def new

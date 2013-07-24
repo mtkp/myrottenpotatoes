@@ -18,3 +18,7 @@ input, input[type="text"], textarea, select, .uneditable-input {
   @include box-sizing;
   display: block;
 }
+
+tbody tr:hover {
+  background: $warningBackground;
+}

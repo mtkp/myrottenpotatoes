@@ -4,6 +4,7 @@
   %table.table
     %thead
       %tr
+        %th #
         %th Movie Title
         %th Rating
         %th Release Date
@@ -11,8 +12,9 @@
         %th Edit Movie
         %th Delete
     %tbody
-      - @movies.each do |movie|
+      - @movies.each_with_index do |movie, i|
         %tr
+          %td= i+1
           %td= movie.title
           %td= movie.rating
           %td= movie.release_date.strftime("%B %d, %Y")
