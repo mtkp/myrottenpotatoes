@@ -1,0 +1,15 @@
+!!! 5
+%html
+  %head
+    %title Rotten Potatoes
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+
+  %body
+    = render 'layouts/header'
+    .container
+      - flash.each do |type, msg|
+        = content_tag(:div, msg, class: "alert alert-#{type}")
+      .row
+        = yield
