@@ -8,4 +8,4 @@ Scenario: Add a movie
   And I select "PG-13" from "Rating"
   And I press "Save Changes"
   Then I should be on the RottenPotatoes home page
-  And I should see "Men In Black"
+  And I should see "Men In Black
