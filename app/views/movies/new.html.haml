@@ -10,5 +10,6 @@
     = date_select :movie, :release_date, start_year: 1930
     = label :movie, :description, "Description"
     = text_area :movie, :description, rows: 4
-    = submit_tag "Save Changes", class: "btn"
-    = link_to "Cancel", movies_path, class: "btn"
+    %div
+      = submit_tag "Save Changes", class: "btn btn-primary"
+      = link_to "Cancel", movies_path, class: "btn"
