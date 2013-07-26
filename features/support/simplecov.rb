@@ -1,0 +1,2 @@
+# for simplecov
+require 'simplecov'
