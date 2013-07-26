@@ -27,6 +27,7 @@ group :test, :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-cucumber'
+  gem 'factory_girl_rails'
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
