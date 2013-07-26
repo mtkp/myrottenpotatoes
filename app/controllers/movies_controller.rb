@@ -1,12 +1,11 @@
 class MoviesController < ApplicationController
+  before_filter :find_movie, only: [:show, :edit] 
 
   def index
     @movies = Movie.order(:title)
   end
 
   def show
-    @movie = Movie.find_by_id params[:id]
-    redirect_to movies_path unless @movie
   end
 
   def new
@@ -19,18 +18,17 @@ class MoviesController < ApplicationController
   end
 
   def edit
-    @movie = Movie.find params[:id]
   end
 
   def update
-    @movie = Movie.find params[:id]
+    @movie = Movie.find_by_id params[:id]
     @movie.update_attributes!(movie_params)
     flash[:success] = "#{@movie.title} was successfully updated."
     redirect_to movie_path(@movie)
   end
 
   def destroy
-    @movie = Movie.find(params[:id])
+    @movie = Movie.find_by_id params[:id]
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
@@ -39,14 +37,22 @@ class MoviesController < ApplicationController
   def search_tmdb
     @movies = Movie.find_in_tmdb(params[:search_terms])
     if @movies.empty?
-      flash[:warning] = "'#{params[:search_terms]}' was not found in TMDb."
+      flash[:notice] = "'#{params[:search_terms]}' was not found in TMDb."
       redirect_to movies_path
     end
+  rescue Movie::InvalidKeyError
+    flash[:error] = "API Key is not valid!"
+    redirect_to movies_path
   end
 
   private
     def movie_params
       params.require(:movie).permit(:title, :rating, :description, :release_date)
+    end
+
+    def find_movie
+      @movie = Movie.find_by_id params[:id]
+      redirect_to movies_path unless @movie
     end
 
 end
