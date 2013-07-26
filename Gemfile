@@ -12,9 +12,10 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'haml'
 gem 'pg'
+gem 'ruby-tmdb3'
 
 group :test do
-  gem 'cucumber-rails', git: 'https://github.com/cucumber/cucumber-rails.git', branch: 'master_rails4_test'
+  gem 'cucumber-rails', git: 'https://github.com/cucumber/cucumber-rails.git', branch: 'master_rails4_test', require: false
 end
 
 group :test, :development do
@@ -22,6 +23,11 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
+  gem 'rspec-rails', '~> 2.0'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+  gem 'factory_girl_rails'
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
