@@ -1,6 +1,5 @@
-.col-lg-12
+.col-lg-12.pad-bottom
   %h2.page-header All Movies
-
   %table.table.table-hover
     %thead
       %tr
@@ -10,12 +9,10 @@
         %th More Info
     %tbody
       = render @movies
-
   = link_to "Add new movie", new_movie_path, class: "btn btn-primary"
 
-.col-lg-4
-  %h3 Search TMDb for a movie
-
+.col-lg-4.well
+  %h4 Search TMDb for a movie
   = form_tag({ action: :search_tmdb }, { class: "form-inline" }) do
     .form-group
       %label{ for: "search_terms" } Search Terms

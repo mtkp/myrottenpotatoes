@@ -1,13 +1,14 @@
-%h2.page-header Search Results
+.col-lg-12
+  %h2.page-header Search Results
 
-%table.table
-  %thead
-    %tr
-      %th Movie Title
-      %th Release Date
-  %tbody
-    - @movies.each_with_index do |movie, i|
+  %table.table
+    %thead
       %tr
-        %td= movie.title
-        %td= release_date movie
-        
+        %th Movie Title
+        %th Release Date
+    %tbody
+      - @movies.each_with_index do |movie, i|
+        %tr
+          %td= movie.title
+          %td= release_date movie
+          
