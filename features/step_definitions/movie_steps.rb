@@ -15,13 +15,7 @@ end
 
 
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
-  return_str = tmdb_mock_results(value)
-  request_url = "http://api.themoviedb.org/3/search/movie?api_key="
-  request_url << ENV["TMDB_API_KEY"]
-  request_url << "&language=en&query="
-  request_url << value.gsub(/\s/, '%20')
-
-  stub_request(:get, request_url).
-    to_return(body: return_str)
+  stub_request(:get, tmdb_request_url(value)).
+    to_return(body: tmdb_mock_results(value))
   fill_in(field, :with => value)
 end

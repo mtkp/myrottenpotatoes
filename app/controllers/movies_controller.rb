@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_filter :find_movie, only: [:show, :edit] 
+  before_filter :find_movie, only: [:show, :edit, :update, :destroy] 
 
   def index
     @movies = Movie.order(:title)
@@ -21,14 +21,12 @@ class MoviesController < ApplicationController
   end
 
   def update
-    @movie = Movie.find_by_id params[:id]
     @movie.update_attributes!(movie_params)
     flash[:success] = "#{@movie.title} was successfully updated."
     redirect_to movie_path(@movie)
   end
 
   def destroy
-    @movie = Movie.find_by_id params[:id]
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
