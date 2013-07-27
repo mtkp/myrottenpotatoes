@@ -12,4 +12,5 @@
         %tr
           %td= i+1
           %td= movie.title
-          %td= Time.parse(movie.release_date).strftime("%B %d, %Y")
+          %td= release_date movie
+          
