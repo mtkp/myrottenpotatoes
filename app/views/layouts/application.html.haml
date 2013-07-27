@@ -12,6 +12,6 @@
     .container
       - flash.each do |type, msg|
         .alert{ class: "alert-#{type}" }
-          %a.close{ href: "#", data: { dismiss: "alert"} } &times;
+          %button.close{ href: "#", data: { dismiss: "alert"} } &times;
           = msg
       = yield
