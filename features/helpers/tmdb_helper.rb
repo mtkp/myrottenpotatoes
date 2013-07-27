@@ -6,3 +6,10 @@ def tmdb_mock_results(string = nil)
 end
 
 alias tmdb_mock_result tmdb_mock_results
+
+def tmdb_request_url(string)
+  request_url = "http://api.themoviedb.org/3/search/movie?api_key="
+  request_url << ENV["TMDB_API_KEY"]
+  request_url << "&language=en&query="
+  request_url << string.gsub(/\s/, '%20')
+end
