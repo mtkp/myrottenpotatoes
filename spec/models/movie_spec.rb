@@ -18,6 +18,12 @@ describe Movie do
       lambda { Movie.find_in_tmdb("Inception") }.
         should raise_error(Movie::InvalidKeyError)
     end
+    it "should raise a RuntimeError if the message doesn't include code 404" do
+      TmdbMovie.stub(:find).
+        and_raise(RuntimeError.new("Error That You Can't Handle"))
+      lambda { Movie.find_in_tmdb("Inception") }.
+        should raise_error(Movie::RuntimeError)
+    end
   end
 
 end

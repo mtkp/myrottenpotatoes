@@ -37,7 +37,7 @@ describe MoviesController do
         response.should redirect_to movies_path
       end
 
-      describe "and then updating the object just editted" do
+      describe "and then updating the object just edited" do
         it "should call the model method that finds the Movie object by id" do
           Movie.should_receive(:find_by_id).with("#{@movie.id}").and_return(@movie)
           patch :update, id: @movie, movie: FactoryGirl.attributes_for(:movie)
@@ -53,10 +53,32 @@ describe MoviesController do
           patch :update, id: @movie, movie: FactoryGirl.attributes_for(:movie)
           response.should redirect_to(movies_path)
         end
-
       end
     end
 
+    describe "and then deleting that Movie" do
+      it "should call the model method that finds the Movie object by id" do
+        Movie.should_receive(:find_by_id).with("#{@movie.id}").and_return(@movie)
+        delete :destroy, id: @movie.id
+      end
+      describe "successfully" do
+        before :each do
+          Movie.stub(:find_by_id).and_return(@movie)          
+        end
+        it "should remove the movie from the model" do
+          expect { delete :destroy, id: @movie.id }.to change(Movie, :count).by(-1)
+        end
+        it "should redirect to the movies index" do
+          delete :destroy, id: @movie.id
+          response.should redirect_to movies_path
+        end
+      end
+      it "should redirect if a movie with the specified ID does not exist" do
+          Movie.stub(:find_by_id).and_return(nil)
+          delete :destroy, id: @movie.id
+          response.should redirect_to(movies_path)
+        end
+    end
   end
 
   describe "searching TMDb" do
@@ -70,7 +92,7 @@ describe MoviesController do
       post :search_tmdb, search_terms: 'hardware'
     end
 
-    it "should flash an error message if there is an InvalidKeyError" do
+    it "should redirect to the index page if the api key is invalid" do
       Movie.stub(:find_in_tmdb).and_raise(Movie::InvalidKeyError)
       post :search_tmdb, search_terms: 'hardware'
       response.should redirect_to(movies_path)
