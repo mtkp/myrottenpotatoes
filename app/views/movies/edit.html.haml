@@ -1,8 +1,7 @@
-.span12
-  %h2 Edit Movie
+.col-lg-6.col-offset-3
+  %h2.page-header Edit Movie
 
   = form_tag movie_path(@movie), method: :put do
     = render 'movie_form'
-    %div
-      = submit_tag "Save Changes", class: "btn btn-primary"
-      = link_to "Cancel", movie_path(@movie), class: "btn"
+    = submit_tag "Save Changes", class: "btn btn-primary"
+    = link_to "Cancel", movie_path(@movie), class: "btn btn-default"

@@ -1,7 +1,7 @@
-.span12
-  %h2 Details about #{@movie.title}
-  
-  %ul.unstyled
+.col-lg-12
+  %h2.page-header Details about #{@movie.title}
+
+  %ul.list-unstyled
     %li
       Rating:
       = @movie.rating
@@ -11,6 +11,6 @@
 
   %h3 Description
   %p= @movie.description
-  = link_to "Edit info", edit_movie_path(@movie)
-  = button_to "Delete", movie_path(@movie), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn'
-  = link_to "Back to movie list", movies_path
+  = link_to "Edit info", edit_movie_path(@movie), class: "btn btn-primary"
+  = link_to "Delete", movie_path(@movie), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'
+  = link_to "Back to movie list", movies_path, class: "btn btn-default"

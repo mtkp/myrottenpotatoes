@@ -1,32 +1,23 @@
-.span12
-  %h2 All Movies
+.col-lg-12
+  %h2.page-header All Movies
 
-  %table.table
+  %table.table.table-hover
     %thead
       %tr
-        %th #
         %th Movie Title
         %th Rating
         %th Release Date
         %th More Info
-        %th Edit Movie
-        %th Delete
     %tbody
-      - @movies.each_with_index do |movie, i|
-        %tr
-          %td= i+1
-          %td= movie.title
-          %td= movie.rating
-          %td= release_date movie
-          %td= link_to "More about #{movie.title}", movie_path(movie)
-          %td= link_to "Edit #{movie.title}", edit_movie_path(movie)
-          %td= link_to "Delete", movie_path(movie), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-mini"
+      = render @movies
 
-  = link_to "Add new movie", new_movie_path, class: "btn"
+  = link_to "Add new movie", new_movie_path, class: "btn btn-primary"
 
-  %h2 Search TMDb for a movie
+.col-lg-4
+  %h3 Search TMDb for a movie
 
   = form_tag({ action: :search_tmdb }, { class: "form-inline" }) do
-    %label{ for: "search_terms" } Search Terms
-    = text_field_tag "search_terms"
-    = submit_tag "Search TMDb", class: "btn"
+    .form-group
+      %label{ for: "search_terms" } Search Terms
+      = text_field_tag "search_terms", nil, class: "form-control"
+    = submit_tag "Search TMDb", class: "btn btn-info"

@@ -1,8 +1,7 @@
-.span12
-  %h2 Create New Movie
+.col-lg-6.col-offset-3
+  %h2.page-header Create New Movie
 
   = form_tag movies_path, method: :post do
     = render 'movie_form'
-    %div
-      = submit_tag "Save Changes", class: "btn btn-primary"
-      = link_to "Cancel", movies_path, class: "btn"
+    = submit_tag "Save Changes", class: "btn btn-primary"
+    = link_to "Cancel", movies_path, class: "btn btn-default"

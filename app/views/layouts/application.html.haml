@@ -5,6 +5,7 @@
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   %body
     = render 'layouts/header'
@@ -13,5 +14,4 @@
         .alert{ class: "alert-#{type}" }
           %a.close{ href: "#", data: { dismiss: "alert"} } &times;
           = msg
-      .row
-        = yield
+      = yield
