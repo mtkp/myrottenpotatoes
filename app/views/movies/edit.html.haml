@@ -1,15 +1,7 @@
-.span12
-  %h2 Edit Movie
+.col-lg-6.col-offset-3
+  %h2.page-header Edit Movie
 
   = form_tag movie_path(@movie), method: :put do
-    = label :movie, :title, "Title"
-    = text_field :movie, :title
-    = label :movie, :rating, "Rating"
-    = select :movie, :rating, ["G", "PG", "PG-13", "R", "NC-17"]
-    = label :movie, :release_date, "Released On"
-    = date_select :movie, :release_date, start_year: 1930
-    = label :movie, :description, "Description"
-    = text_area :movie, :description, rows: 4
-    %div
-      = submit_tag "Save Changes", class: "btn btn-primary"
-      = link_to "Cancel", movie_path(@movie), class: "btn"
+    = render 'movie_form'
+    = submit_tag "Save Changes", class: "btn btn-primary"
+    = link_to "Cancel", movie_path(@movie), class: "btn btn-default"

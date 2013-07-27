@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/anjlab/bootstrap-rails.git
+  revision: 7556d2c17115e8d4e5f8ba17b19e6cb6fdece1a3
+  branch: 3.0.0
+  specs:
+    anjlab-bootstrap-rails (3.0.0.rc1)
+      railties (>= 3.0)
+      sass (>= 3.2)
+
+GIT
   remote: https://github.com/cucumber/cucumber-rails.git
   revision: 5fa9da37ab05213d2f46029ea476e09104ffe281
   branch: master_rails4_test
@@ -39,8 +48,6 @@ GEM
     addressable (2.3.5)
     arel (4.0.0)
     atomic (1.1.10)
-    bootstrap-sass (2.3.2.1)
-      sass (~> 3.2)
     builder (3.1.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -223,7 +230,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass
+  anjlab-bootstrap-rails!
   capybara
   coffee-rails (~> 4.0.0)
   cucumber-rails!
