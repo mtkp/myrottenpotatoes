@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'helpers/param_helper'
 
 describe MoviesController do
   before :each do
@@ -19,7 +18,21 @@ describe MoviesController do
         Movie.should_receive(:new)
         post :create, movie: @movie_attributes
       end
-
+      it "should redirect to the index if successfully saved" do
+        Movie.any_instance.stub(:save).and_return(true)
+        post :create, movie: @movie_attributes
+        response.should redirect_to movies_path
+      end
+      it "should render the new page if new @movie instance is nil" do
+        Movie.stub(:new).and_return(nil)
+        post :create, movie: @movie_attributes
+        response.should render_template 'new'
+      end
+      it "should render the new page if new @movie instance is nil" do
+        Movie.any_instance.stub(:save).and_return(false)
+        post :create, movie: @movie_attributes
+        response.should render_template 'new'
+      end
     end
   end
 

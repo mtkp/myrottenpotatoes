@@ -2,8 +2,10 @@ require 'spec_helper'
 
 describe Movie do
 
-  subject { @movie = Movie.new(title: "My New Movie", rating: "PG-13",
+  before { @movie = Movie.new(title: "My New Movie", rating: "PG-13",
     release_date: "2004-01-03", ) }
+
+  subject { @movie }
 
   it { should respond_to :title }
   it { should respond_to :rating }
@@ -11,6 +13,13 @@ describe Movie do
   it { should respond_to :description }
   it { should respond_to :grandfathered? }
   it { should respond_to :released_1930_or_later }
+
+  describe "release date attr" do
+    describe "should be invalid if release date is before 1930" do
+      before { @movie.release_date = "1929-06-06" }
+      it { should_not be_valid }
+    end
+  end
 
   describe "searching TMDb by keyword" do
     it "should call TMDb with title keywords given valid API key" do
