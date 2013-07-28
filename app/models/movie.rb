@@ -1,9 +1,22 @@
 class Movie < ActiveRecord::Base
 
   class Movie::InvalidKeyError < StandardError; end
+  RATINGS = %w[ G PG PG-13 R NC-17 ]
+  @@grandfathered_date = Time.parse("1 Nov 1968")
 
-  def self.api_key
-    ENV["TMDB_API_KEY"]
+  # validations
+  validates :title, presence: true
+  validates :release_date, presence: true
+  validate :released_1930_or_later
+  validates :rating, inclusion: { in: RATINGS }, unless: :grandfathered?
+
+  # methods
+  def grandfathered? ; self.release_date < @@grandfathered_date ; end
+  def self.api_key ; ENV["TMDB_API_KEY"] ; end
+
+  def released_1930_or_later
+    errors.add(:release_date, "must be 1930 or later") if
+      self.release_date <= Time.parse("31 Dec 1929")
   end
 
   def self.find_in_tmdb(string)
