@@ -16,7 +16,7 @@ class Movie < ActiveRecord::Base
 
   def released_1930_or_later
     errors.add(:release_date, "must be 1930 or later") if
-      self.release_date < Time.parse("1 Jan 1930")
+      self.release_date <= Time.parse("31 Dec 1929")
   end
 
   def self.find_in_tmdb(string)
