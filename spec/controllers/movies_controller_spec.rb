@@ -1,8 +1,26 @@
 require 'spec_helper'
+require 'helpers/param_helper'
 
 describe MoviesController do
   before :each do
     @movie = FactoryGirl.create(:movie)
+  end
+
+  describe "making a new Movie object" do
+    it "should render the new movie template form" do
+      get :new
+      response.should render_template 'new'
+    end
+    describe "and then submitting it to be created" do
+      before :each do
+        @movie_attributes = FactoryGirl.attributes_for(:movie)
+      end
+      it "should call the Movie Model method new" do
+        Movie.should_receive(:new)
+        post :create, movie: @movie_attributes
+      end
+
+    end
   end
 
   describe "showing a Movie object" do
@@ -38,20 +56,33 @@ describe MoviesController do
       end
 
       describe "and then updating the object just edited" do
+        before (:each) do
+          @movie_attributes = FactoryGirl.attributes_for(:movie)
+        end
         it "should call the model method that finds the Movie object by id" do
           Movie.should_receive(:find_by_id).with("#{@movie.id}").and_return(@movie)
-          patch :update, id: @movie, movie: FactoryGirl.attributes_for(:movie)
+          patch :update, id: @movie, movie: @movie_attributes
+        end
+        it "should call the model method that updates the Movie object" do
+          Movie.stub(:find_by_id).and_return(@movie)
+          Movie.any_instance.should_receive(:update_attributes)
+          patch :update, id: @movie, movie: @movie_attributes
         end
 
         it "should select the show movie template for rendering" do
           Movie.stub(:find_by_id).and_return(@movie)
-          patch :update, id: @movie, movie: FactoryGirl.attributes_for(:movie)
+          patch :update, id: @movie, movie: @movie_attributes
           response.should redirect_to movie_path(@movie)
         end
         it "should redirect if a movie with the specified ID does not exist" do
           Movie.stub(:find_by_id).and_return(nil)
-          patch :update, id: @movie, movie: FactoryGirl.attributes_for(:movie)
+          patch :update, id: @movie, movie: @movie_attributes
           response.should redirect_to(movies_path)
+        end
+        it "should render edit if the update attr failed" do
+          Movie.any_instance.stub(:update_attributes).and_return false
+          patch :update, id: @movie, movie: @movie_attributes
+          response.should render_template 'edit'
         end
       end
     end
