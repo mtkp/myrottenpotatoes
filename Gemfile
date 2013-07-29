@@ -15,6 +15,8 @@ gem 'jbuilder', '~> 1.2'
 gem 'haml'
 gem 'pg'
 gem 'ruby-tmdb3'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 group :test do
   gem 'cucumber-rails', git: 'https://github.com/cucumber/cucumber-rails.git', branch: 'master_rails4_test', require: false
