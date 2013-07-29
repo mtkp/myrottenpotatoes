@@ -2,6 +2,16 @@
 
 body { padding-top: 60px; }
 
+footer {
+  border-top: 1px solid #e5e5e5;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  p {
+    margin-bottom: 0px;
+  }
+}
+
 .pad-bottom {
   margin-bottom: 20px;
 }
