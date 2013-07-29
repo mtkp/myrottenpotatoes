@@ -1,10 +1,6 @@
 .navbar.navbar-fixed-top.navbar-inverse
   .container
-    %button.navbar-toggle{data: { toggle: "collapse", target: ".navbar-responsive-collapse" }}
-      %span.icon-bar
-      %span.icon-bar
-      %span.icon-bar
-
+    = render 'layouts/navbar_btn'
     = link_to "Rotten Potatoes", root_path, class: "navbar-brand"
     .nav-collapse.collapse.navbar-responsive-collapse
       %ul.nav.navbar-nav
