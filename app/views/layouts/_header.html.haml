@@ -3,5 +3,9 @@
     = render 'layouts/navbar_btn'
     = link_to "Rotten Potatoes", root_path, class: "navbar-brand"
     .nav-collapse.collapse.navbar-responsive-collapse
-      %ul.nav.navbar-nav
-        %li= link_to "Sign in with Twitter", "#"
+      %ul.nav.navbar-nav.pull-right
+        - if @current_user
+          %li.navbar-text= "Logged in as #{@current_user.name}"
+          %li= link_to "Log out", logout_path
+        - else
+          %li= link_to "Log in with Twitter", login_path
