@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_filter :find_movie, only: [:show, :edit, :update, :destroy] 
+  before_filter :find_movie, only: [:show, :edit, :update, :destroy]
 
   def index
     @movies = Movie.order(:title)
