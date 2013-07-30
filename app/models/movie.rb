@@ -1,5 +1,5 @@
 class Movie < ActiveRecord::Base
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :moviegoers, through: :reviews
 
   class Movie::InvalidKeyError < StandardError; end
