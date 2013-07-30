@@ -7,6 +7,7 @@ class ReviewsController < ApplicationController
 
   def create
     @current_user.reviews << @movie.reviews.build(review_params)    
+    redirect_to @movie
   end
 
 private
