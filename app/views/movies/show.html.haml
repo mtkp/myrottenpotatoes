@@ -11,6 +11,14 @@
 
   %h3 Description
   %p= @movie.description
-  = link_to "Edit info", edit_movie_path(@movie), class: "btn btn-primary"
-  = link_to "Delete", movie_path(@movie), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'
+
+- if @movie.reviews.any?
+  = render 'movie_reviews'
+
+
+.col-lg-12.col-sm-12
+  - if @current_user
+    = link_to "Add a review", new_movie_review_path(@movie), class: "btn btn-primary"
+  = link_to "Edit info", edit_movie_path(@movie), class: "btn btn-info"
+  = link_to "Delete this movie", movie_path(@movie), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'
   = link_to "Back to movie list", movies_path, class: "btn btn-default"
