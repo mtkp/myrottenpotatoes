@@ -1,5 +1,5 @@
 class Moviegoer < ActiveRecord::Base
-
+  has_many :reviews
 
   def self.create_with_omniauth(auth)
     Moviegoer.create!(

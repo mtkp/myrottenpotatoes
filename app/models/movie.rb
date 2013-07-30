@@ -1,4 +1,5 @@
 class Movie < ActiveRecord::Base
+  has_many :reviews
 
   class Movie::InvalidKeyError < StandardError; end
   RATINGS = %w[ G PG PG-13 R NC-17 ]
