@@ -12,15 +12,9 @@
   %h3 Description
   %p= @movie.description
 
-.col-lg-6.col-sm-6
-  - if @movie.reviews.any?
-    %h3 Reviews
-    %table.table.table-hover
-      %tbody
-        - @movie.reviews.each do |review|
-          %tr
-            %td= review.moviegoer.name
-            %td= review.potatoes
+- if @movie.reviews.any?
+  = render 'movie_reviews'
+
 
 .col-lg-12.col-sm-12
   - if @current_user

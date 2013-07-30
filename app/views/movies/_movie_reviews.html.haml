@@ -1,0 +1,8 @@
+.col-lg-6.col-sm-6
+  %h3 Reviews
+  %table.table.table-hover
+    %tbody
+      - @movie.reviews.each do |review|
+        %tr
+          %td= review.moviegoer.name
+          %td= review.potatoes
