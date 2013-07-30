@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
 
-  skip_before_action :set_current_user
+  skip_before_action :set_current_user, only: :create
+
+  def new
+  end
 
   def create
     auth = request.env['omniauth.auth']

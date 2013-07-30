@@ -51,14 +51,14 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
-  private
-    def movie_params
-      params.require(:movie).permit(:title, :rating, :description, :release_date)
-    end
+private
+  def movie_params
+    params.require(:movie).permit(:title, :rating, :description, :release_date)
+  end
 
-    def find_movie
-      @movie = Movie.find_by_id params[:id]
-      redirect_to movies_path unless @movie
-    end
+  def find_movie
+    @movie = Movie.find_by_id params[:id]
+    redirect_to movies_path unless @movie
+  end
 
 end

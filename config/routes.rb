@@ -10,7 +10,8 @@ Myrottenpotatoes::Application.routes.draw do
   root to: redirect('/movies')
 
   # omniauth & sessions routes
-  get 'auth/twitter', as: 'login'
+  get 'login' => 'sessions#new'
+  get 'auth/twitter', as: 'auth'
   get 'auth/twitter/callback' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
 end
