@@ -2,5 +2,8 @@
 
 FactoryGirl.define do
   factory :review do
+    movie
+    moviegoer
+    potatoes  3
   end
 end
