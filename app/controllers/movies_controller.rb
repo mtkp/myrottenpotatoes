@@ -28,7 +28,7 @@ class MoviesController < ApplicationController
   def update
     if @movie.update_attributes movie_params
       flash[:success] = "#{@movie.title} was successfully updated."
-      redirect_to movie_path(@movie)
+      redirect_to @movie
     else
       render 'edit'
     end
