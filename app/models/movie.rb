@@ -24,7 +24,9 @@ class Movie < ActiveRecord::Base
   def self.find_in_tmdb(string)
     Tmdb.api_key = self.api_key
     begin
-      TmdbMovie.find(title: string, expand_results: false)
+      results = TmdbMovie.find(title: string, expand_results: false)
+      results = [results] unless results.is_a? Array
+      results
     rescue ArgumentError => tmdb_error
       raise Movie::InvalidKeyError, tmdb_error.message
     rescue RuntimeError => tmdb_error
