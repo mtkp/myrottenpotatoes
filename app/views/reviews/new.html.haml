@@ -1,8 +1,7 @@
 .col-lg-6.col-offset-3
-  %h2.page-header New Review for #{@movie.title}
+  %h2.page-header New review for #{@movie.title}
 
-  = form_tag movie_reviews_path do
-    .form-group
-      = label :reviews, :potatoes, "How many potatoes?"
-      = select_tag "review[potatoes]", options_for_select(1..5), { class: "form-control"}
+  = form_tag movie_reviews_path(@movie), method: :post do
+    = render "review_form"
     = submit_tag 'Create Review', class: "btn btn-primary"
+    = link_to "Cancel", @movie, class: "btn btn-default"
