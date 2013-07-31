@@ -1,0 +1,3 @@
+.form-group
+  = label :reviews, :potatoes, "How many potatoes?"
+  = select_tag "review[potatoes]", options_for_select(1..5, @review.potatoes), { class: "form-control"}
