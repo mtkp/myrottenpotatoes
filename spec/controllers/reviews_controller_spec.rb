@@ -31,13 +31,19 @@ describe ReviewsController do
     end
   end
   describe "creating a review" do
-    it "should build a new Review object and append it to the current user" do
+    it "should build a new Review object using the parameters passed in" do
       Moviegoer.stub(:find_by_id).and_return @moviegoer
-      Movie.stub(:new).and_return @review
+      Review.should_receive(:new).with(@review_attr.to_query)
       post :create, movie_id: @movie, review: @review_attr
-      @moviegoer.reviews.should include(@review)
     end
-    it "should redirect to the movie" do
+    it "should build a new Review object and append it to the current user" do
+      @new_moviegoer = FactoryGirl.create(:moviegoer)
+      Moviegoer.stub(:find_by_id).and_return @new_moviegoer
+      Review.stub(:new).and_return @review
+      post :create, movie_id: @movie, review: @review_attr
+      @new_moviegoer.reviews.should include(@review)
+    end
+    it "should redirect to the movie after creating the review" do
       Moviegoer.stub(:find_by_id).and_return @moviegoer
       post :create, movie_id: @movie, review: @review_attr
       response.should redirect_to @movie
