@@ -26,7 +26,7 @@ describe Review do
       end
     end
     it "should be invalid otherwise" do
-      [0, 6, 10].each do |bad_ranking|
+      [0, 6, -1, 10, 42].each do |bad_ranking|
         @review.potatoes = bad_ranking
         @review.should_not be_valid
       end
