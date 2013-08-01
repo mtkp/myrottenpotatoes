@@ -19,12 +19,15 @@ module NavigationHelpers
     when /^the RottenPotatoes home\s?page$/
       '/movies'
 
-    when /the Create New Movie page/
+    when /^the Create New Movie page$/
       '/movies/new'
 
-    when /the "Search Results" page/
+    when /^the "Search Results" page$/
       '/movies/search_tmdb'
       
+    when /^the Details About (.*) page$/
+      movie_path(Movie.find_by_title($1))
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
