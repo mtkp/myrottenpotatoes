@@ -5,4 +5,5 @@ class Review < ActiveRecord::Base
 
   validates :movie_id, presence: true
   validates :moviegoer_id, presence: true
+  validates :potatoes, inclusion: POTATOES
 end
