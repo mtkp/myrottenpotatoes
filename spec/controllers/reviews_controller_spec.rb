@@ -31,11 +31,6 @@ describe ReviewsController do
     end
   end
   describe "creating a review" do
-    it "should build a new Review object using the parameters passed in" do
-      Moviegoer.stub(:find_by_id).and_return @moviegoer
-      Review.should_receive(:new).with(@review_attr.to_query)
-      post :create, movie_id: @movie, review: @review_attr
-    end
     it "should build a new Review object and append it to the current user" do
       @new_moviegoer = FactoryGirl.create(:moviegoer)
       Moviegoer.stub(:find_by_id).and_return @new_moviegoer
@@ -50,5 +45,18 @@ describe ReviewsController do
     end
   end
 
+  describe "editing a review" do
+    it "should redirect if the review does not belong to the current user" do
+      @new_moviegoer = FactoryGirl.create(:moviegoer)
+      Moviegoer.stub(:find_by_id).and_return @new_moviegoer
+      get :edit, movie_id: @movie, id: @review
+      response.should redirect_to @movie
+    end
+    it "should get the review from the parameters" do
+      Moviegoer.stub(:find_by_id).and_return @moviegoer # for current user
+      Review.should_receive(:find_by_id).with("#{@review.id}")
+      get :edit, movie_id: @movie, id: @review
+    end
+  end
 
 end
