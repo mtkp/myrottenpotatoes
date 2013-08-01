@@ -10,7 +10,7 @@
       = render @movies
   = link_to "Add new movie", new_movie_path, class: "btn btn-primary"
 
-.col-lg-4.well
+.col-lg-4.col-sm-6.well
   %h4 Search TMDb for a movie
   = form_tag({ action: :search_tmdb }, { class: "form-inline" }) do
     .form-group
