@@ -5,7 +5,8 @@
     .nav-collapse.collapse.navbar-responsive-collapse
       %ul.nav.navbar-nav.pull-right
         - if @current_user
-          %li.navbar-text= "Logged in as #{@current_user.name}"
+          %li
+            .navbar-text= "Logged in as #{@current_user.name}"
           %li= link_to "Log out", logout_path
         - else
           %li= link_to "Log in", login_path
