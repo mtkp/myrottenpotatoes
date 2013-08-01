@@ -22,15 +22,30 @@ movies.each do |movie|
 end
 
 moviegoers = [
-  { name: "Alice", provider: "twitter", uid: "000000001" },
-  { name: "Bob", provider: "twitter", uid: "000000002" },
-  { name: "Charlie", provider: "twitter", uid: "000000003" },
-  { name: "Dan", provider: "twitter", uid: "000000004" },
-  { name: "Emily", provider: "twitter", uid: "000000005" },
-  { name: "Frank", provider: "twitter", uid: "000000006" },
-  { name: "Gabby", provider: "twitter", uid: "000000007" },
+  { name: "Alice" },
+  { name: "Bob" },
+  { name: "Charlie" },
+  { name: "Dan" },
+  { name: "Emily" },
+  { name: "Frank"},
+  { name: "Gabby" },
+  { name: "Hank" },
+  { name: "Irene" },
+  { name: "Jackson" },
+  { name: "Kelsey" },
+  { name: "Leo" },
+  { name: "Melinda" },
+  { name: "Nathan" }
 ]
 
-moviegoers.each do |moviegoer|
-  Moviegoer.create!(moviegoer)
+moviegoers.each_with_index do |moviegoer, i|
+  moviegoer[:uid] = (1000 + i).to_s
+  moviegoer[:provider] = "twitter"
+  new_moviegoer = Moviegoer.create!(moviegoer)
+
+  # create reviews for some movies for the moviegoer
+  Movie.all.sample(4).each do |movie|
+    review = { potatoes: Review::POTATOES.sample }
+    new_moviegoer.reviews << movie.reviews.build(review)
+  end
 end

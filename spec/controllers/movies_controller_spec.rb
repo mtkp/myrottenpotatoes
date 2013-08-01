@@ -69,7 +69,7 @@ describe MoviesController do
       end
 
       describe "and then updating the object just edited" do
-        before (:each) do
+        before :each do
           @movie_attributes = FactoryGirl.attributes_for(:movie)
         end
         it "should call the model method that finds the Movie object by id" do
