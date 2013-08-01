@@ -11,6 +11,8 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+    @review = @current_user.reviews.find_by_id params[:id]
+    redirect_to @movie unless @review
   end
 
   def update
