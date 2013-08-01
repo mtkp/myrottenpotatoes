@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_filter :has_moviegoer_and_movie
-
+  before_filter :find_review, only: [:edit, :update]
   def new
     @review = @movie.reviews.build
   end
@@ -11,11 +11,11 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @review = @current_user.reviews.find_by_id params[:id]
-    redirect_to @movie unless @review
   end
 
   def update
+    @review.update_attributes(review_params)
+    redirect_to @movie
   end
 
 private
@@ -33,6 +33,11 @@ private
 
   def review_params
     params.require(:review).permit(:movie, :moviegoer, :potatoes)
+  end
+
+  def find_review
+    @review = @current_user.reviews.find_by_id params[:id]
+    redirect_to @movie unless @review
   end
 
 end
