@@ -17,8 +17,10 @@
 
 
 .col-lg-12.col-sm-12
-  - if @current_user
-    = link_to "Add or edit your review", new_movie_review_path(@movie), class: "btn btn-primary"
+  - if @review
+    = link_to "Edit your review", edit_movie_review_path(@movie, @review), class: "btn btn-primary"
+  - elsif @current_user
+    = link_to "Add your review", new_movie_review_path(@movie), class: "btn btn-primary"
   = link_to "Edit movie info", edit_movie_path(@movie), class: "btn btn-info"
   = link_to "Delete this movie", movie_path(@movie), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger'
   = link_to "Back to movie list", movies_path, class: "btn btn-default"

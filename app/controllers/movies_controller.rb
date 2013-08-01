@@ -6,6 +6,7 @@ class MoviesController < ApplicationController
   end
 
   def show
+    @review = @current_user.reviews.find_by_movie_id @movie.id if @current_user
   end
 
   def new
