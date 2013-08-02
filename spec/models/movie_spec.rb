@@ -13,6 +13,8 @@ describe Movie do
   it { should respond_to :description }
   it { should respond_to :grandfathered? }
   it { should respond_to :released_1930_or_later }
+  it { should respond_to :reviews }
+  it { should respond_to :moviegoers }
 
   describe "release date attr" do
     describe "should be invalid if release date is before 1930" do
@@ -42,6 +44,32 @@ describe Movie do
         and_raise(RuntimeError.new("Error That You Can't Handle"))
       lambda { Movie.find_in_tmdb("Inception") }.
         should raise_error(Movie::RuntimeError)
+    end
+  end
+
+  describe "potato average method" do
+    before :each do
+      @new_movie = FactoryGirl.create(:movie)
+    end
+    describe "for a movie with reviews" do
+      before :each do
+        @moviegoers = []
+        3.times do |i|
+          @moviegoers[i] = FactoryGirl.create(:moviegoer)
+        end
+        @moviegoers[0].reviews << @new_movie.reviews.build(potatoes: 4)
+        @moviegoers[1].reviews << @new_movie.reviews.build(potatoes: 4)
+        @moviegoers[2].reviews << @new_movie.reviews.build(potatoes: 5)
+      end
+      it "should return the average of the potatoes from the reviews" do
+        @new_movie.potato_average.should == 4.3
+      end
+    end
+
+    describe "for a movie without reviews" do
+      it "should return 0.0" do
+        @new_movie.potato_average.should == 0.0
+      end
     end
   end
 
