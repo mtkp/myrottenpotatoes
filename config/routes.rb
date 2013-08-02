@@ -11,7 +11,9 @@ Myrottenpotatoes::Application.routes.draw do
 
   # omniauth & sessions routes
   get 'login' => 'sessions#new'
-  get 'auth/twitter', as: 'auth'
+  get 'auth/twitter', as: 'twitter_auth'
+  get 'auth/facebook', as: 'facebook_auth'
   get 'auth/twitter/callback' => 'sessions#create'
+  get 'auth/facebook/callback' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
 end
