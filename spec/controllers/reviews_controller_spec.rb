@@ -57,6 +57,7 @@ describe ReviewsController do
       get :edit, movie_id: @movie, id: @review
       response.should redirect_to @movie
     end
+
     before :each do
       Moviegoer.stub(:find_by_id).and_return @moviegoer # for current user      
     end
@@ -78,6 +79,7 @@ describe ReviewsController do
       patch :update, movie_id: @movie, id: @review, review: @review_attr
       response.should redirect_to @movie
     end
+
     before :each do
       Moviegoer.stub(:find_by_id).and_return @moviegoer # for current user
     end
@@ -93,6 +95,33 @@ describe ReviewsController do
     it "should redirect to the movie after updating the review" do
       Review.stub(:find_by_id).and_return @review
       patch :update, movie_id: @movie, id: @review, review: @review_attr
+      response.should redirect_to @movie
+    end
+  end
+
+  describe "destroying a review" do
+    it "should redirect if the review does not belong to the current user" do
+      @new_moviegoer = FactoryGirl.create(:moviegoer)
+      Moviegoer.stub(:find_by_id).and_return @new_moviegoer
+      delete :destroy, movie_id: @movie, id: @review
+      response.should redirect_to @movie
+    end
+
+    before :each do
+      Moviegoer.stub(:find_by_id).and_return @moviegoer # for current user
+    end
+    it "should get the review from the parameters" do
+      Review.should_receive(:find_by_id).with("#{@review.id}")
+      delete :destroy, movie_id: @movie, id: @review
+    end
+    it "should remove the review from the Review model" do
+      Review.stub(:find_by_id).and_return @review
+      expect { delete :destroy, movie_id: @movie, id: @review }.
+        to change(Review, :count).by(-1)
+    end
+    it "should redirect to the movie view" do
+      Review.stub(:find_by_id).and_return @review
+      delete :destroy, movie_id: @movie, id: @review
       response.should redirect_to @movie
     end
   end
