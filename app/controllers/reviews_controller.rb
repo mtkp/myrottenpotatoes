@@ -6,7 +6,8 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @current_user.reviews << @movie.reviews.build(review_params)    
+    review = @current_user.reviews.find_or_create_by(movie_id: @movie.id)
+    review.update_attributes(review_params)
     redirect_to @movie
   end
 
@@ -32,12 +33,15 @@ private
   end
 
   def review_params
-    params.require(:review).permit(:movie, :moviegoer, :potatoes)
+    params.require(:review).permit(:potatoes)
   end
 
   def find_review
     @review = @current_user.reviews.find_by_id params[:id]
-    redirect_to @movie unless @review
+    unless @review
+      flash[:error] = "That review does not exist."
+      redirect_to @movie
+    end
   end
 
 end
