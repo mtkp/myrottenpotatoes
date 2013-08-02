@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_filter :has_moviegoer_and_movie
-  before_filter :find_review, only: [:edit, :update]
+  before_filter :find_review, except: [:new, :create]
+
   def new
     @review = @movie.reviews.build
   end
@@ -16,6 +17,11 @@ class ReviewsController < ApplicationController
 
   def update
     @review.update_attributes(review_params)
+    redirect_to @movie
+  end
+
+  def destroy
+    @review.destroy
     redirect_to @movie
   end
 
