@@ -17,6 +17,7 @@ gem 'pg'
 gem 'ruby-tmdb3'
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 group :test do
   gem 'cucumber-rails', git: 'https://github.com/cucumber/cucumber-rails.git', branch: 'master_rails4_test', require: false
