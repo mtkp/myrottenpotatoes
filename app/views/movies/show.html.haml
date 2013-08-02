@@ -1,23 +1,18 @@
 .col-lg-12
   %h2.page-header Details about #{@movie.title}
 
-  %ul.list-unstyled
-    %li
-      Rating:
-      = @movie.rating
-    %li
-      Released on:
-      = release_date @movie
-
-  %h3 Description
-  %p= @movie.description
+  %dl
+    %dt Rating
+    %dd= @movie.rating
+    %dt Released Date
+    %dd= release_date @movie
+    %dt Description
+    %dd= @movie.description
+    %dt Average potatoes
+    %dd{class: review_class(@potato_average)}= @potato_average
 
 - if @movie.reviews.any?
   .col-lg-6.col-sm-6
-    %h2 Reviews
-    %p.lead.review-average
-      Average potatoes:
-      %span{class: review_class(@potato_average)}= @potato_average
     = render 'movie_reviews'
 
 
