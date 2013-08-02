@@ -21,6 +21,12 @@ class Movie < ActiveRecord::Base
       self.release_date <= Time.parse("31 Dec 1929")
   end
 
+  def potato_average
+    return 0.0 unless self.reviews.any?
+    sum = self.reviews.inject(0.0) { |total, r| total + r.potatoes }
+    (sum / self.reviews.count).round 1
+  end
+
   def self.find_in_tmdb(string)
     Tmdb.api_key = self.api_key
     begin
