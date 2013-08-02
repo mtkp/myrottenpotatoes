@@ -6,9 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    auth = request.env['omniauth.auth']
-    user = Moviegoer.find_by_provider_and_uid(auth[:provider], auth[:uid]) ||
-      Moviegoer.create_with_omniauth(auth)
+    user = Moviegoer.find_or_create_from_auth_hash(auth_hash)
     session[:user_id] = user.id
     redirect_to movies_path
   end
@@ -18,5 +16,11 @@ class SessionsController < ApplicationController
     flash[:notice] = "Logged out successfully."
     redirect_to movies_path
   end
+
+protected
+  
+  def auth_hash
+    request.env['omniauth.auth']
+  end  
 
 end
