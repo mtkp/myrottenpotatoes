@@ -7,6 +7,7 @@ class MoviesController < ApplicationController
 
   def show
     @review = @current_user.reviews.find_by_movie_id @movie.id if @current_user
+    @potato_average = @movie.potato_average
   end
 
   def new

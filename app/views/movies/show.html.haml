@@ -13,7 +13,12 @@
   %p= @movie.description
 
 - if @movie.reviews.any?
-  = render 'movie_reviews'
+  .col-lg-6.col-sm-6
+    %h2 Reviews
+    %p.lead.review-average
+      Average potatoes:
+      %span{class: review_class(@potato_average)}= @potato_average
+    = render 'movie_reviews'
 
 
 .col-lg-12.col-sm-12
