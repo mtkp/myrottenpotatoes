@@ -43,7 +43,7 @@ describe Movie do
       TmdbMovie.stub(:find).
         and_raise(RuntimeError.new("Error That You Can't Handle"))
       lambda { Movie.find_in_tmdb("Inception") }.
-        should raise_error(Movie::RuntimeError)
+        should raise_error(RuntimeError)
     end
   end
 
