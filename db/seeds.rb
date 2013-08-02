@@ -14,7 +14,6 @@ movies = [
     release_date: '14-Jun-2013', description: "A young itinerant worker is forced to confront his secret extraterrestrial heritage when Earth is invaded by members of his race." },
   { title: 'Pacific Rim', rating: 'PG-13',
     release_date: '12-Jul-2013', description: "As a war between humankind and monstrous sea creatures wages on, a former pilot and a trainee are paired up to drive a seemingly obsolete special weapon in a desperate effort to save the world from the apocalypse." }
-
 ]
 
 movies.each do |movie|
@@ -44,8 +43,15 @@ moviegoers.each_with_index do |moviegoer, i|
   new_moviegoer = Moviegoer.create!(moviegoer)
 
   # create reviews for some movies for the moviegoer
-  Movie.all.sample(4).each do |movie|
-    review = { potatoes: Review::POTATOES.sample }
+  Movie.all.sample(5).each do |movie|
+    review = {}
+    if movie.title =~ /\AInception\z/
+      review[:potatoes] = [3,4,5,5].sample
+    elsif movie.title =~ /\AMan of Steel\z/
+      review[:potatoes] = [1,1,2,3].sample
+    else
+      review[:potatoes] = Review::POTATOES.sample
+    end
     new_moviegoer.reviews << movie.reviews.build(review)
   end
 end
