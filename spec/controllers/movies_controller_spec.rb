@@ -19,7 +19,7 @@ describe MoviesController do
         post :create, movie: @movie_attributes
       end
       it "should redirect to the index if successfully saved" do
-        Movie.any_instance.stub(:save).and_return(true)
+        Movie.any_instance.stub(:valid?).and_return(true)
         post :create, movie: @movie_attributes
         response.should redirect_to movies_path
       end
@@ -122,6 +122,20 @@ describe MoviesController do
           delete :destroy, id: @movie.id
           response.should redirect_to(movies_path)
         end
+    end
+  end
+
+  describe "the index action" do
+    before :each do
+      @movies = []
+      5.times do
+        @movies << FactoryGirl.create(:movie)
+      end
+    end
+    it "should get all the movies in the movie model" do
+      Movie.stub(:order).and_return @movies
+      get :index
+      expect(assigns(:movies)).to match_array(@movies)
     end
   end
 
