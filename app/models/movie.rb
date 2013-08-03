@@ -14,7 +14,6 @@ class Movie < ActiveRecord::Base
 
   # methods
   def grandfathered? ; self.release_date < @@grandfathered_date ; end
-  def self.api_key ; ENV["TMDB_API_KEY"] ; end
 
   def released_1930_or_later
     errors.add(:release_date, "must be 1930 or later") if
@@ -22,9 +21,10 @@ class Movie < ActiveRecord::Base
   end
 
   def potato_average
-    return 0.0 unless self.reviews.any?
-    sum = self.reviews.inject(0.0) { |total, r| total + r.potatoes }
-    (sum / self.reviews.count).round 1
+    reviews = self.reviews
+    return 0.0 unless reviews.any?
+    sum = reviews.inject(0.0) { |total, r| total + r.potatoes }
+    (sum / reviews.count).round(1)
   end
 
   def self.find_in_tmdb(string)
@@ -43,5 +43,8 @@ class Movie < ActiveRecord::Base
       end
     end
   end
-
+private
+  def self.api_key
+    ENV["TMDB_API_KEY"]
+  end
 end
