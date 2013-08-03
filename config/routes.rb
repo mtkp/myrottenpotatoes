@@ -1,8 +1,7 @@
 Myrottenpotatoes::Application.routes.draw do
-  
   # movie routes
   resources :movies do
-    resources :reviews
+    resources :reviews, except: [:index, :show]
   end
   post '/movies/search_tmdb'
 
