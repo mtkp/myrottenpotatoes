@@ -1,10 +1,11 @@
 module ApplicationHelper
 
   def release_date(movie)
-    if movie.release_date.respond_to? :strftime
-      movie.release_date.strftime("%b %d, %Y") 
+    date = movie.release_date
+    if date.respond_to? :strftime
+      date.strftime("%b %d, %Y")
     else
-      Time.parse(movie.release_date).strftime("%b %d, %Y")
+      Time.parse(date).strftime("%b %d, %Y")
     end
   rescue ArgumentError
     ""
