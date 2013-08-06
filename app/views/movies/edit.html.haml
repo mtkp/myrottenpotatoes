@@ -2,6 +2,6 @@
   %h2.page-header Edit Movie
 
   = form_tag movie_path(@movie), method: :put do
-    = render 'movie_form'
+    = render 'movie_form', movie: @movie
     = submit_tag "Save Changes", class: "btn btn-primary"
     = link_to "Cancel", movie_path(@movie), class: "btn btn-default"
