@@ -25,7 +25,7 @@ module NavigationHelpers
     when /^the "Search Results" page$/
       '/movies/search_tmdb'
       
-    when /^the Details About (.*) page$/
+    when /^the (.*) details page$/
       movie_path(Movie.find_by_title($1))
 
     # Add more mappings here.

@@ -4,8 +4,9 @@ class Movie < ActiveRecord::Base
 
   class Movie::InvalidKeyError < StandardError; end
   RATINGS = %w[ G PG PG-13 R NC-17 ]
+  @@base_image_url = "http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185"
   @@grandfathered_date = Time.parse("1 Nov 1968")
-
+  @@filler_image_url = "no_poster.jpg"
   # validations
   validates :title, presence: true
   validates :release_date, presence: true
@@ -22,6 +23,13 @@ class Movie < ActiveRecord::Base
 
   def review_average
     self.reviews.average(:potatoes).to_f.round(1)
+  end
+
+  def image_path
+    return @@filler_image_url if self.tmdb_id.nil?
+    Tmdb.api_key = Movie.api_key
+    tmdb_movie = TmdbMovie.find(id: self.tmdb_id, expand_results: false)
+    @@base_image_url + tmdb_movie.poster_path
   end
 
   def self.find_in_tmdb(string)
