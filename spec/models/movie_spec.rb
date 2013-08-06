@@ -62,13 +62,13 @@ describe Movie do
         @moviegoers[2].reviews << @new_movie.reviews.build(potatoes: 5)
       end
       it "should return the average of the potatoes from the reviews" do
-        @new_movie.potato_average.should == 4.3
+        @new_movie.review_average.should == 4.3
       end
     end
 
     describe "for a movie without reviews" do
       it "should return 0.0" do
-        @new_movie.potato_average.should == 0.0
+        @new_movie.review_average.should == 0.0
       end
     end
   end
