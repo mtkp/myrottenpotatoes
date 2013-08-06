@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130806205643) do
+ActiveRecord::Schema.define(version: 20130806224254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20130806205643) do
     t.datetime "release_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tmdb_id"
   end
 
   add_index "movies", ["title"], name: "index_movies_on_title", using: :btree
