@@ -18,7 +18,6 @@ gem 'ruby-tmdb3'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
-gem 'metric_fu'
 
 group :test do
   gem 'cucumber-rails', git: 'https://github.com/cucumber/cucumber-rails.git', branch: 'master_rails4_test', require: false
@@ -36,6 +35,7 @@ group :test, :development do
   gem 'guard-rspec'
   gem 'guard-cucumber'
   gem 'factory_girl_rails'
+  gem 'metric_fu', require: false
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
