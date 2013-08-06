@@ -8,12 +8,17 @@
     %dd= release_date @movie
     %dt Description
     %dd= @movie.description
-    - if @movie.reviews.any?
-      %dt Average potatoes
-      %dd{class: review_class(@average)}= @average
+    %dt Average potatoes
+    %dd{class: review_class(@average)}= @average
 
 .col-lg-6.col-sm-6
-  = render 'movie_reviews'
+  %table.table.table-hover
+    %h4 Reviews
+    - if @reviews.empty?
+      %p This movie has not yet been reviewed.
+    - else
+      %tbody
+        = render @reviews
 
 .col-lg-12.col-sm-12
   - if @current_user

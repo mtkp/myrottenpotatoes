@@ -6,6 +6,7 @@ class MoviesController < ApplicationController
   end
 
   def show
+    @reviews = @movie.reviews
     @current_user_review = @current_user.review_for @movie if @current_user
     @average = @movie.review_average
   end
