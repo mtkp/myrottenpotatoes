@@ -102,26 +102,33 @@ describe MoviesController do
 
     describe "and then deleting that Movie" do
       it "should call the model method that finds the Movie object by id" do
-        Movie.should_receive(:find_by_id).with("#{@movie.id}").and_return(@movie)
-        delete :destroy, id: @movie.id
+        Movie.should_receive(:find_by_id).with("#{@movie.id}")
+        delete :destroy, id: @movie
       end
       describe "successfully" do
         before :each do
-          Movie.stub(:find_by_id).and_return(@movie)          
+          Movie.stub(:find_by_id).and_return(@movie)
+          Moviegoer.stub(:find_by_id).and_return FactoryGirl.create(:admin)
         end
         it "should remove the movie from the model" do
-          expect { delete :destroy, id: @movie.id }.to change(Movie, :count).by(-1)
+          expect { delete :destroy, id: @movie }.to change(Movie, :count).by(-1)
         end
         it "should redirect to the movies index" do
-          delete :destroy, id: @movie.id
+          delete :destroy, id: @movie
           response.should redirect_to movies_path
         end
       end
       it "should redirect if a movie with the specified ID does not exist" do
-          Movie.stub(:find_by_id).and_return(nil)
-          delete :destroy, id: @movie.id
-          response.should redirect_to(movies_path)
-        end
+        Movie.stub(:find_by_id).and_return(nil)
+        delete :destroy, id: @movie
+        response.should redirect_to movies_path
+      end
+      it "should redirect to the movie if the current user is not an admin" do
+        Movie.stub(:find_by_id).and_return(@movie)
+        Moviegoer.stub(:find_by_id).and_return FactoryGirl.create(:moviegoer)
+        delete :destroy, id: @movie
+        response.should redirect_to @movie
+      end
     end
   end
 
