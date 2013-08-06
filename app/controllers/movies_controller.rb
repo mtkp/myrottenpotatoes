@@ -63,4 +63,11 @@ private
     redirect_to movies_path unless @movie
   end
 
+  def admin_user
+    unless @current_user && @current_user.admin
+      flash[:danger] = "You are not authorized to delete this movie."
+      redirect_to @movie
+    end
+  end
+
 end
