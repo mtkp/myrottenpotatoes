@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
-    flash[:notice] = "Your review for #{@movie.title} has been removed."
+    flash[:info] = "Your review for #{@movie.title} has been removed."
     redirect_to @movie
   end
 
@@ -32,11 +32,11 @@ private
 
   def has_moviegoer_and_movie
     unless @current_user
-      flash[:error] = "You must be logged in to create a review."
+      flash[:danger] = "You must be logged in to create a review."
       redirect_to login_path
     end
     unless (@movie = Movie.find_by_id(params[:movie_id]))
-      flash[:error] = "Review must be for an existing movie."
+      flash[:danger] = "Review must be for an existing movie."
       redirect_to movies_path
     end
   end
@@ -48,7 +48,7 @@ private
   def find_review
     @review = @current_user.reviews.find_by_id params[:id]
     unless @review
-      flash[:error] = "That review does not exist."
+      flash[:danger] = "That review does not exist."
       redirect_to @movie
     end
   end

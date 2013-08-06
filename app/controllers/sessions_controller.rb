@@ -8,12 +8,13 @@ class SessionsController < ApplicationController
   def create
     user = Moviegoer.find_or_create_from_auth_hash(auth_hash)
     session[:user_id] = user.id
+    flash[:success] = "Logged in successfully!"
     redirect_to movies_path
   end
 
   def destroy
     session.delete(:user_id)
-    flash[:notice] = "Logged out successfully."
+    flash[:info] = "Logged out successfully."
     redirect_to root_path
   end
 

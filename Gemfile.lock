@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 4ec1018b3dd8078f3489bc53f2ac92782b6442f2
+  revision: 49a2a477dc309df32900aafe1a376ed6f9d48615
   branch: 3.0.0
   specs:
     anjlab-bootstrap-rails (3.0.0.rc1)
@@ -48,7 +48,7 @@ GEM
     addressable (2.3.5)
     arel (4.0.0)
     arrayfields (4.9.0)
-    atomic (1.1.10)
+    atomic (1.1.12)
     awesome_print (1.1.0)
     bluff (0.1.0)
     builder (3.1.4)
@@ -178,7 +178,7 @@ GEM
     mime-types (1.23)
     mini_portile (0.5.1)
     minitest (4.7.5)
-    multi_json (1.7.7)
+    multi_json (1.7.8)
     multi_test (0.0.2)
     multipart-post (1.2.0)
     nokogiri (1.6.0)

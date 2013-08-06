@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   before_action :find_movie, only: [:show, :edit, :update, :destroy]
+  before_action :admin_user, only: [:destroy]
 
   def index
     @movies = Movie.order(:title)
@@ -38,18 +39,18 @@ class MoviesController < ApplicationController
 
   def destroy
     @movie.destroy
-    flash[:notice] = "Movie '#{@movie.title}' deleted."
+    flash[:info] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
 
   def search_tmdb
     @movies = Movie.find_in_tmdb(params[:search_terms])
     if @movies.empty?
-      flash[:notice] = "'#{params[:search_terms]}' was not found in TMDb."
+      flash[:info] = "'#{params[:search_terms]}' was not found in TMDb."
       redirect_to movies_path
     end
   rescue Movie::InvalidKeyError
-    flash[:error] = "API Key is not valid!"
+    flash[:danger] = "API Key is not valid!"
     redirect_to movies_path
   end
 
@@ -61,6 +62,13 @@ private
   def find_movie
     @movie = Movie.find_by_id params[:id]
     redirect_to movies_path unless @movie
+  end
+
+  def admin_user
+    unless @current_user && @current_user.admin
+      flash[:danger] = "You are not authorized to delete this movie."
+      redirect_to @movie
+    end
   end
 
 end
