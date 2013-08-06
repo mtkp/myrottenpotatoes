@@ -2,7 +2,7 @@
 
 rake db:drop:all
 rake db:create:all
-rake db:migrate
+rake db:schema:load
 rake db:seed
 rake db:test:prepare
-echo "Database has been reset, populated, and prepared"
+echo "Development and test databases have been reset and seeded."
