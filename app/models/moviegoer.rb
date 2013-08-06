@@ -9,4 +9,8 @@ class Moviegoer < ActiveRecord::Base
       name: auth_hash[:info][:name]
     )
   end
+
+  def review_for(movie)
+    self.reviews.find_by_movie_id movie.id
+  end
 end
