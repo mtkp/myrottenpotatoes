@@ -10,6 +10,7 @@ describe Moviegoer do
     it { should respond_to :name }
     it { should respond_to :uid }
     it { should respond_to :provider }
+    it { should respond_to :admin }
     it { should respond_to :reviews }
     it { should respond_to :movies }
 
@@ -38,4 +39,14 @@ describe Moviegoer do
       result.should == @moviegoer
     end
   end
+
+  describe "the default value for admin" do
+    before :each do
+      @new_moviegoer = Moviegoer.new
+    end
+    it "should be false" do
+      @new_moviegoer.admin.should be false
+    end
+  end
+
 end
