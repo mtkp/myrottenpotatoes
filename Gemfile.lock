@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 49a2a477dc309df32900aafe1a376ed6f9d48615
+  revision: fe940d3f99e22a2ff1d05ba04de909ee9d64f984
   branch: 3.0.0
   specs:
     anjlab-bootstrap-rails (3.0.0.rc1)
@@ -281,7 +281,7 @@ GEM
       sexp_processor (~> 4.0)
     ruby_parser (3.1.3)
       sexp_processor (~> 4.1)
-    safe_yaml (0.9.4)
+    safe_yaml (0.9.5)
     sass (3.2.10)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)

@@ -1,4 +1,4 @@
-.navbar.navbar-fixed-top.navbar-inverse
+.navbar.navbar-static-top.navbar-inverse
   .container
     = render 'layouts/navbar_btn'
     = link_to "Rotten Potatoes", root_path, class: "navbar-brand"
@@ -6,7 +6,7 @@
       %ul.nav.navbar-nav.pull-right
         - if current_user
           %li
-            .navbar-text= "Logged in as #{current_user.name}"
+            %p.navbar-text= "Logged in as #{current_user.name}"
           %li= link_to "Log out", logout_path
         - else
           %li= link_to "Log in", login_path
