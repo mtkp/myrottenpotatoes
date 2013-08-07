@@ -1,10 +1,15 @@
 Given /I have added "(.*)" with rating "(.*)"/ do |title, rating|
   steps %Q{
-    Given I am on the Create New Movie page
+    Given I am signed in
+    And I am on the Create New Movie page
     When I fill in "Title" with "#{title}"
     And I select "#{rating}" from "Rating"
     And I press "Save Changes"
   }
+end
+
+Given /I am signed in/ do
+  visit "/auth/twitter"
 end
 
 Then /I should see "(.*)" before "(.*)" on (.*)/ do |string1, string2, path|
