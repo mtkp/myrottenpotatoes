@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   before_action :find_movie, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:new, :create, :edit, :update]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :admin_user, only: [:destroy]
 
   def index
@@ -66,7 +66,7 @@ private
   end
 
   def admin_user
-    unless @current_user && @current_user.admin
+    unless @current_user.admin
       flash[:danger] = "You are not authorized to delete this movie."
       redirect_to @movie
     end
