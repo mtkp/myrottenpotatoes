@@ -6,6 +6,10 @@ describe MoviesController do
   end
 
   describe "making a new Movie object" do
+    before :each do
+      @moviegoer = FactoryGirl.create(:moviegoer)
+      Moviegoer.stub(:find_by_id).and_return @moviegoer
+    end
     it "should render the new movie template form" do
       get :new
       response.should render_template 'new'
@@ -53,6 +57,10 @@ describe MoviesController do
     end
 
     describe "and then editing that object" do
+      before :each do
+        @moviegoer = FactoryGirl.create(:moviegoer)
+      Moviegoer.stub(:find_by_id).and_return @moviegoer
+      end
       it "should call the model method that finds the Movie object by id" do
         Movie.should_receive(:find_by_id).with("#{@movie.id}").and_return(@movie)
         get :edit, id: @movie.id
