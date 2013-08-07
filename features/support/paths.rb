@@ -19,6 +19,9 @@ module NavigationHelpers
     when /^the RottenPotatoes home\s?page$/
       '/movies'
 
+    when /^the Log In page$/
+      login_path
+
     when /^the Create New Movie page$/
       '/movies/new'
 
