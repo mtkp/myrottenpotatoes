@@ -8,4 +8,12 @@ protected
   def set_current_user
     @current_user ||= Moviegoer.find_by_id(session[:user_id])
   end
+
+  def logged_in_user
+    unless @current_user
+      flash[:info] = "Please sign in first!"
+      redirect_to login_path
+    end
+  end
+
 end

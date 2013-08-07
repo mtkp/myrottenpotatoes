@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_filter :has_moviegoer_and_movie
+  before_filter :find_movie_and_logged_in_user
   before_filter :find_review, except: [:new, :create]
 
   def new
@@ -30,11 +30,8 @@ class ReviewsController < ApplicationController
 
 private
 
-  def has_moviegoer_and_movie
-    unless @current_user
-      flash[:danger] = "You must be logged in to create a review."
-      redirect_to login_path
-    end
+  def find_movie_and_logged_in_user
+    logged_in_user
     unless (@movie = Movie.find_by_id(params[:movie_id]))
       flash[:danger] = "Review must be for an existing movie."
       redirect_to movies_path

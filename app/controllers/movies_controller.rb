@@ -72,9 +72,4 @@ private
     end
   end
 
-  def logged_in_user
-    flash[:info] = "Please sign in first!"
-    redirect_to login_path unless @current_user
-  end
-
 end
