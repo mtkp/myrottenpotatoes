@@ -10,3 +10,14 @@ Scenario: Add a movie
   And I press "Save Changes"
   Then I should be on the RottenPotatoes home page
   And I should see "Men In Black"
+
+Scenario: Add a movie but not logged in
+  Given I am on the RottenPotatoes home page
+  When I follow "Add new movie"
+  Then I should be on the Log In page
+  And I should see "Log in with Twitter"
+  And I should see "Log in with Facebook"
+  When I follow "Log in with Twitter"
+  Then I should be on the RottenPotatoes home page
+  When I follow "Add new movie"
+  Then I should be on the Create New Movie page
