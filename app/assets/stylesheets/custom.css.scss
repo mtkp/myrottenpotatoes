@@ -2,7 +2,7 @@
 
 
 
-/* page arrangement */
+/* general page arrangement */
 footer {
   border-top: 1px solid #e5e5e5;
   margin-top: 20px;
@@ -24,6 +24,20 @@ footer {
 .page-header {
   margin-top: 20px;
 }
+
+
+/* movie info */
+.movie-image {
+  margin-right: 10px;
+  margin-bottom: 4px;
+  -moz-box-shadow:    4px 4px 4px #ccc;
+  -webkit-box-shadow: 4px 4px 4px #ccc;
+  box-shadow:         4px 4px 4px #ccc;
+}
+.movie-title {
+  font-size: 1.8em;
+}
+
 
 
 /* ratings colors */

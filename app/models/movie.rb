@@ -4,9 +4,12 @@ class Movie < ActiveRecord::Base
 
   class Movie::InvalidKeyError < StandardError; end
   RATINGS = %w[ G PG PG-13 R NC-17 ]
-  @@base_image_url = "http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185"
+  @@small_base_image_url = "http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w92"
+  @@large_base_image_url = "http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w370"
   @@grandfathered_date = Time.parse("1 Nov 1968")
-  @@filler_image_url = "no_poster.jpg"
+  @@small_filler_image_url = "/assets/no_poster_92.jpg"
+  @@large_filler_image_url = "/assets/no_poster_185.jpg"
+
   # validations
   validates :title, presence: true
   validates :release_date, presence: true
@@ -25,15 +28,24 @@ class Movie < ActiveRecord::Base
     self.reviews.average(:potatoes).to_f.round(1)
   end
 
-  def image_path
-    return @@filler_image_url if self.tmdb_id.nil?
-    Tmdb.api_key = Movie.api_key
-    tmdb_movie = TmdbMovie.find(id: self.tmdb_id, expand_results: false)
-    @@base_image_url + tmdb_movie.poster_path
+  def small_image
+    Movie.image_path(self.tmdb_id, @@small_base_image_url, @@small_filler_image_url)
+  end
+
+  def large_image
+    Movie.image_path(self.tmdb_id, @@large_base_image_url, @@large_filler_image_url)
+  end
+
+  def self.image_path(tmdb_id, base_path, filler_path)
+    self.initialize_tmdb
+    tmdb_movie = TmdbMovie.find(id: tmdb_id, expand_results: false)
+    base_path + tmdb_movie.poster_path
+  rescue ArgumentError, RuntimeError
+    return filler_path
   end
 
   def self.find_in_tmdb(string)
-    Tmdb.api_key = self.api_key
+    self.initialize_tmdb
     results = TmdbMovie.find(title: string, expand_results: false)
     results.is_a?(Array) ? results : [results]
   rescue ArgumentError => tmdb_error
@@ -46,6 +58,11 @@ class Movie < ActiveRecord::Base
     end
   end
 private
+
+  def self.initialize_tmdb
+    Tmdb.api_key = self.api_key
+  end
+
   def self.api_key
     ENV["TMDB_API_KEY"]
   end

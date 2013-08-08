@@ -1,18 +1,19 @@
 .col-lg-12
-  %h2.page-header #{@movie.title}
-
-  .col-lg-2
-    = image_tag(@movie.image_path, class: "img-thumbnail")
-  .col-lg-10
-    %dl
-      %dt Rating
-      %dd= @movie.rating
-      %dt Released Date
-      %dd= release_date @movie
-      %dt Description
-      %dd= @movie.description
-      %dt Average potatoes
-      %dd{class: review_class(@average)}= @average
+  = link_to image_tag(@movie.small_image, class: "movie-image"), @movie.large_image, class: "pull-left"
+  .movie-info
+    .movie-title= @movie.title
+    %div
+      %strong Rating
+      = @movie.rating
+    %div
+      %strong Release date
+      = release_date @movie
+    %div
+      %strong Average potatoes
+      %span{class: review_class(@average)}= @average
+    %div
+      %strong Description
+      = @movie.description
 
 .col-lg-6.col-sm-6
   %table.table.table-hover
