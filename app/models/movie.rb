@@ -34,18 +34,15 @@ class Movie < ActiveRecord::Base
 
   def self.find_in_tmdb(string)
     Tmdb.api_key = self.api_key
-    begin
-      results = TmdbMovie.find(title: string, expand_results: false)
-      results = [results] unless results.is_a? Array
-      results
-    rescue ArgumentError => tmdb_error
+    results = TmdbMovie.find(title: string, expand_results: false)
+    results.is_a?(Array) ? results : [results]
+  rescue ArgumentError => tmdb_error
+    raise Movie::InvalidKeyError, tmdb_error.message
+  rescue RuntimeError => tmdb_error
+    if tmdb_error.message =~ /status code '404'/
       raise Movie::InvalidKeyError, tmdb_error.message
-    rescue RuntimeError => tmdb_error
-      if tmdb_error.message =~ /status code '404'/
-        raise Movie::InvalidKeyError, tmdb_error.message
-      else
-        raise RuntimeError, tmdb_error.message
-      end
+    else
+      raise RuntimeError, tmdb_error.message
     end
   end
 private
