@@ -28,16 +28,11 @@ RP = {
   filter_adult: function() {
     // 'this' is element that received event from checkbox action
     if ($(this).is(':checked')) {
-      $('#movies tbody tr').each(RP.hide_if_adult_row);
+      $('#movies tr.adult').hide();
     } else {
       $('#movies tbody tr').show();
     }
   },
-  hide_if_adult_row: function() {
-    if (! /^G|PG$/i.test($(this).find('td:nth-child(2)').text())) {
-      $(this).hide();
-    }
-  }
 };
 $(RP.setup);
 
