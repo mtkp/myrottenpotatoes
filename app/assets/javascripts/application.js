@@ -65,6 +65,6 @@ RP = {
   }
 };
 
-$(RP.setup);
-
+$(document).ready(RP.setup);
+$(document).on('page:load', RP.setup);
 
