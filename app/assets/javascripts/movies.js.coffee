@@ -1,4 +1,7 @@
+
 RP =
+
+  movieCache: {}
 
   setup: ->
     # construct new DOM elements
@@ -20,13 +23,19 @@ RP =
       $('#movies tbody tr').show()
 
   getMovieInfo: ->
-    $.ajax
-      type: 'GET'
-      url: $(this).attr('href')
-      timeout: 5000
-      success: RP.showMovieInfo
-      error: ->
-        alert('Error!')
+    if (RP.movieCache[this.pathname])
+      RP.showMovieInfo(RP.movieCache[this.pathname])
+    else
+      RP.movieCache = {}
+      $.ajax
+        type: 'GET'
+        url: $(this).attr('href')
+        timeout: 5000
+        success: (data) ->
+          RP.movieCache[this.url] = data
+          RP.showMovieInfo(data)
+        error: ->
+          alert('Error!')
     return false
 
   showMovieInfo: (data) ->
