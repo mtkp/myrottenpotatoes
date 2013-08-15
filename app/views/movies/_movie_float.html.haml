@@ -1,16 +1,19 @@
-.pull-right= link_to "×", '', id: "closeLink", class: "close"
-.movie-info
-  .movie-title= movie.title
-  %div
-    %strong Rating
-    = movie.rating
-  %div
-    %strong Release date
-    = release_date movie
-  %div
-    %strong Average potatoes
-    %span{class: review_class(average)}= average
-  %div
-    %strong Description
-    = movie.description
-= link_to "More info...", movie
+.panel
+  .panel-heading
+    .pull-right= link_to "×", '', id: "closeLink", class: "close"
+    .panel-title= movie.title
+  .panel-body
+    .movie-info
+      %div
+        %strong Rating
+        = movie.rating
+      %div
+        %strong Release date
+        = release_date movie
+      %div
+        %strong Average potatoes
+        %span{class: review_class(average)}= average
+      %div
+        %strong Description
+        = movie.description
+    = link_to "More info...", movie
