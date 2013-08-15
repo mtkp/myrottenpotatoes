@@ -27,19 +27,19 @@ RP =
       success: RP.showMovieInfo
       error: ->
         alert('Error!')
-    return(false)
+    return false
 
   showMovieInfo: (data) ->
     # center a floater 1/2 as wide and 1/4 as tall as screen
     oneFourth = Math.ceil($(window).width() / 4)
     $('#movieInfo').html(data).
       css({'left': oneFourth, 'width': 2*oneFourth, 'top': 250}).show()
-    $('closeLink').click(RP.hideMovieInfo)
-    return(false)
+    $('closeLink').click RP.hideMovieInfo
+    return false
 
   hideMovieInfo: ->
     $('#movieInfo').hide()
-    return(false)
+    return false
 
 
 $(document).ready(RP.setup);
