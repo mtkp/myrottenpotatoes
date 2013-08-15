@@ -10,6 +10,8 @@ class MoviesController < ApplicationController
   def show
     @current_user_review = @current_user.review_for @movie if @current_user
     @average = @movie.review_average
+    render partial: 'movie_float',
+      locals: {movie: @movie, average: @average} and return if request.xhr?
   end
 
   def new
