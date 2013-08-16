@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 9500319f4b57753e6c1f56f9df3802f18fecf6c7
+  revision: 507323616c5a3e2fe6d9e60cc21cce7d58a639f5
   branch: 3.0.0
   specs:
     anjlab-bootstrap-rails (3.0.0.rc2)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/cucumber/cucumber-rails.git
-  revision: 465601898011295b00b7b43e30a1d3597ba46222
+  revision: 601573cab8437ceb36ead6fe3460c084ae1d4800
   branch: master_rails4_test
   specs:
     cucumber-rails (1.3.1)
@@ -258,7 +258,7 @@ GEM
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
     rspec-core (2.14.5)
-    rspec-expectations (2.14.2)
+    rspec-expectations (2.14.1)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.3)
     rspec-rails (2.14.0)
