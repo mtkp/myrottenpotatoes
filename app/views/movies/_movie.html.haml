@@ -1,4 +1,5 @@
-%tr{class: ("adult" unless movie.rating =~ /\AG|PG$\z/)}
-  %td= link_to movie.title, movie
-  %td= movie.rating
-  %td= release_date movie
+- cache(movie) do
+  %tr{class: ("adult" unless movie.rating =~ /\AG|PG$\z/)}
+    %td= link_to movie.title, movie
+    %td= movie.rating
+    %td= release_date movie
