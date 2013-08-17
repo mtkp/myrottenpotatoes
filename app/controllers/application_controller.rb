@@ -11,7 +11,7 @@ protected
 
   def logged_in_user
     unless @current_user
-      flash[:info] = "Please sign in first!"
+      flash[:info] = "Please log in first!"
       redirect_to login_path
     end
   end
