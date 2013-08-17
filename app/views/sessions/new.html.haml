@@ -1,8 +1,9 @@
-.col-lg-6.col-offset-3
-  %h2.page-header Log In
-  - if @current_user
-    %p= "You are currently logged in as #{@current_user.name}"
-    = link_to "Log out", logout_path, class: "btn btn-default"
-  - else
-    = link_to "Log in with Twitter", twitter_auth_path, class: "btn btn-info"
-    = link_to "Log in with Facebook", facebook_auth_path, class: "btn btn-primary"
+.row
+  .col-md-6.col-md-offset-3
+    %h2.page-header Log In
+    - if @current_user
+      %p= "You are currently logged in as #{@current_user.name}"
+      %div= link_to "Log out", logout_path, class: "btn btn-warning"
+    - else
+      %div= link_to "Log in with Twitter", twitter_auth_path, class: "btn btn-info"
+      %div= link_to "Log in with Facebook", facebook_auth_path, class: "btn btn-primary"
