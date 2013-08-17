@@ -7,7 +7,7 @@
         %th Rating
         %th Release Date
     %tbody
-      - cache(cache_key_for_movie_table) do
+      - cache(cache_key_for_movies_table) do
         = render @movies
   = link_to "Add new movie", new_movie_path, class: "btn btn-primary"
 
