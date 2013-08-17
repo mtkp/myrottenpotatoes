@@ -11,8 +11,8 @@
     = render 'layouts/header', current_user: @current_user
     .container
       - flash.each do |type, msg|
-        .alert{ class: "alert-#{type}" }
-          %button.close{ href: "#", data: { dismiss: "alert"} } &times;
+        .alert{ class: "alert-#{type} alert-dismissable" }
+          %button.close{ type: "button", href: "#", aria: {hidden: "true"}, data: { dismiss: "alert"} } &times;
           = msg
       = yield
     = render 'layouts/footer'

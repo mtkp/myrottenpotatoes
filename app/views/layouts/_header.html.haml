@@ -4,10 +4,9 @@
       = render 'layouts/navbar_btn'
       = link_to "Rotten Potatoes", movies_path, class: "navbar-brand"
     .navbar-collapse.collapse.navbar-ex1-collapse
-      %ul.nav.navbar-nav.pull-right
+      %p.navbar-text.navbar-right
         - if current_user
-          %li
-            %p.navbar-text= "Logged in as #{current_user.name}"
-          %li= link_to "Log out", logout_path
+          = "Logged in as #{current_user.name}."
+          = link_to "Log out", logout_path, class: "navbar-link"
         - else
-          %li= link_to "Log in", login_path
+          = link_to "Log in", login_path, class: "navbar-link"
