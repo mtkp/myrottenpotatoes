@@ -16,13 +16,14 @@
       = @movie.description
 
 .col-lg-6.col-sm-6
+  %h4 Reviews
   %table.table.table-hover
-    %h4 Reviews
     - if @movie.reviews.empty?
       %p This movie has not yet been reviewed.
     - else
       %tbody
-        = render @movie.reviews
+        - cache(cache_key_for_reviews_table(@movie)) do
+          = render @movie.reviews
 
 .col-lg-12.col-sm-12
   - if @current_user

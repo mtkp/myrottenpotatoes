@@ -1,3 +1,4 @@
 %tr
-  %td= review.moviegoer_name
-  %td= review.potatoes
+  - cache(review) do
+    %td= review.moviegoer_name
+    %td= review.potatoes
