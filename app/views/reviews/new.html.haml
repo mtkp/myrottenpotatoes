@@ -1,5 +1,5 @@
-.col-lg-6.col-offset-3
-  %h2.page-header New review for #{@movie.title}
+.col-md-6.col-md-offset-3
+  %h3 New review for #{@movie.title}
 
   = form_tag movie_reviews_path(@movie), method: :post do
     = render "review_form", review: @review
