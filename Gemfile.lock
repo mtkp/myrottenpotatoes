@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: a3732e0dfbdcb254953de8935b5d2606a69e28c7
+  revision: bdbc7a7fc98df40ae7f015bb1d1bfd40e03f86ed
   branch: 3.0.0
   specs:
     anjlab-bootstrap-rails (3.0.0.rc2)
@@ -314,7 +314,7 @@ GEM
     thread_safe (0.1.2)
       atomic
     tilt (1.4.1)
-    treetop (1.4.14)
+    treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
     turbolinks (1.3.0)
