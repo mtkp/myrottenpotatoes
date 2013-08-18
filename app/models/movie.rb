@@ -29,11 +29,13 @@ class Movie < ActiveRecord::Base
   end
 
   def small_image
-    Movie.image_path(self.tmdb_id, @@small_base_image_url, @@small_filler_image_url)
+    Movie.image_path(self.tmdb_id, @@small_base_image_url,
+                     @@small_filler_image_url)
   end
 
   def large_image
-    Movie.image_path(self.tmdb_id, @@large_base_image_url, @@large_filler_image_url)
+    Movie.image_path(self.tmdb_id, @@large_base_image_url,
+                     @@large_filler_image_url)
   end
 
   def self.image_path(tmdb_id, base_path, filler_path)
