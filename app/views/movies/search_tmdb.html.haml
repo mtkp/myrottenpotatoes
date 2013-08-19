@@ -9,6 +9,5 @@
       %tbody
         - @movies.each_with_index do |movie, i|
           %tr
-            %td= movie.title
+            %td= link_to movie.title, "http://www.themoviedb.org/movie/#{movie.id}"
             %td= release_date movie
-            
