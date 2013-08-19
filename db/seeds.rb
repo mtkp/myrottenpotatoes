@@ -20,6 +20,17 @@ movies.each do |movie|
   Movie.create!(movie)
 end
 
+(1..1000).each do |n|
+
+  Movie.create!(
+    title: "movie #{n}",
+    rating: 'PG-13',
+    release_date: '1-Jan-1990',
+    description: "Seeded movie number #{n}."
+  )
+
+end
+
 moviegoers = [
   { name: "Alice" },
   { name: "Bob" },
@@ -34,7 +45,19 @@ moviegoers = [
   { name: "Kelsey" },
   { name: "Leo" },
   { name: "Melinda" },
-  { name: "Nathan" }
+  { name: "Nathan" },
+  { name: "Olivia" },
+  { name: "Peter" },
+  { name: "Queenie" },
+  { name: "Robert" },
+  { name: "Sylvia" },
+  { name: "Tucker" },
+  { name: "Uma" },
+  { name: "Viktor" },
+  { name: "Wanda" },
+  { name: "Xerxes" },
+  { name: "Yolanda" },
+  { name: "Zeus" }
 ]
 
 moviegoers.each_with_index do |moviegoer, i|
@@ -43,15 +66,8 @@ moviegoers.each_with_index do |moviegoer, i|
   new_moviegoer = Moviegoer.create!(moviegoer)
 
   # create reviews for some movies for the moviegoer
-  Movie.all.sample(5).each do |movie|
-    review = {}
-    if movie.title =~ /\AInception\z/
-      review[:potatoes] = [3,4,5,5].sample
-    elsif movie.title =~ /\AMan of Steel\z/
-      review[:potatoes] = [1,1,2,3].sample
-    else
-      review[:potatoes] = Review::POTATOES.sample
-    end
+  Movie.first(200).sample(100).each do |movie|
+    review = { potatoes: Review::POTATOES.sample }
     new_moviegoer.reviews << movie.reviews.build(review)
   end
 end
