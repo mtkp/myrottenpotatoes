@@ -46,7 +46,17 @@ label.explanation {
 #movieInfo {
   position: absolute;
 }
+.panel {
+  border: 1px solid #ddd;
+  .panel-heading {
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;
+  }
+}
+a.preview {
+  margin-left: 10px;
 
+}
 
 
 /* ratings colors */

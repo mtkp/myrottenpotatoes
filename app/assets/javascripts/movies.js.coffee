@@ -24,7 +24,7 @@ RP =
       $('#movies tbody tr').show()
 
   addMovieInfoPreview: ->
-    " <small><a class=\"preview\" href=\"" +
+    "<small><a class=\"preview\" href=\"" +
     this.pathname +
     "\">preview</a></small>"
 
