@@ -13,7 +13,8 @@ RP =
 
     # add invisible div to end of page for movie info float
     $('<div id="movieInfo"></div>').hide().appendTo $('body')
-    $('#movies a').click(RP.getMovieInfo)
+    $('#movies a').after(RP.addMovieInfoPreview)
+    $('#movies .preview').click(RP.getMovieInfo)
 
   filter_adult: ->
     # 'this' is element that received event from checkbox action
@@ -21,6 +22,11 @@ RP =
       $('#movies tr.adult').hide()
     else
       $('#movies tbody tr').show()
+
+  addMovieInfoPreview: ->
+    " <small><a class=\"preview\" href=\"" +
+    this.pathname +
+    "\">preview</a></small>"
 
   getMovieInfo: ->
     if (RP.movieCache[this.pathname])
@@ -52,5 +58,5 @@ RP =
 
 
 $(document).ready(RP.setup);
-$(document).on('page:load', RP.setup);
+$(document).on('page:change', RP.setup);
 
