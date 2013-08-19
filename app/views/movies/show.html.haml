@@ -24,8 +24,8 @@
         %p This movie has not yet been reviewed.
       - else
         %tbody
-          -# cache(cache_key_for_reviews_table(@movie)) do
-          = render 'reviews/reviews', movie: @movie
+          - cache(cache_key_for_reviews_table(@movie)) do
+            = render 'reviews/reviews', movie: @movie
 
 
 .row
