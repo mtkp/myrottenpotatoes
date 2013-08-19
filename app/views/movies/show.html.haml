@@ -25,7 +25,8 @@
       - else
         %tbody
           - cache(cache_key_for_reviews_table(@movie)) do
-            = render @movie.reviews
+            = render 'reviews/reviews', movie: @movie
+
 
 .row
   .col-lg-12

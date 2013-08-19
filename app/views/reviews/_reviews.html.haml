@@ -1,0 +1,5 @@
+- movie.reviews.includes(:moviegoer).each do |review|
+  %tr
+    - cache(review) do
+      %td= review.moviegoer.name
+      %td= review.potatoes
