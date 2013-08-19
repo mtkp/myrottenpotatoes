@@ -1,5 +1,5 @@
 .row
-  .col-md-12.pad-bottom
+  .col-xs-12.pad-bottom
     %h2 All Movies
     %table.table.table-hover#movies
       %thead
@@ -12,7 +12,7 @@
           = render @movies
     = link_to "Add new movie", new_movie_path, class: "btn btn-primary"
 .row
-  .col-sm-6.well
+  .col-md-6.well
     %h4 Search TMDb for a movie
     = form_tag({ action: :search_tmdb }, { role: "form" }) do
       .form-group
