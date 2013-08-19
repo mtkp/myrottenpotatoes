@@ -13,22 +13,17 @@ movies = [
   { title: 'Man of Steel', rating: 'PG-13', tmdb_id: 49521,
     release_date: '14-Jun-2013', description: "A young itinerant worker is forced to confront his secret extraterrestrial heritage when Earth is invaded by members of his race." },
   { title: 'Pacific Rim', rating: 'PG-13', tmdb_id: 68726,
-    release_date: '12-Jul-2013', description: "As a war between humankind and monstrous sea creatures wages on, a former pilot and a trainee are paired up to drive a seemingly obsolete special weapon in a desperate effort to save the world from the apocalypse." }
+    release_date: '12-Jul-2013', description: "As a war between humankind and monstrous sea creatures wages on, a former pilot and a trainee are paired up to drive a seemingly obsolete special weapon in a desperate effort to save the world from the apocalypse." },
+  { title: 'Elysium', rating: 'R', tmdb_id: 68724,
+    release_date: '9-Aug-2013', description: "In the year 2159, two classes of people exist: the very wealthy who live on a pristine man-made space station called Elysium, and the rest, who live on an overpopulated, ruined Earth. Secretary Rhodes (Jodie Foster), a hard line government official, will stop at nothing to enforce anti-immigration laws and preserve the luxurious lifestyle of the citizens of Elysium. That doesn't stop the people of Earth from trying to get in, by any means they can. When unlucky Max (Matt Damon) is backed into a corner, he agrees to take on a daunting mission that, if successful, will not only save his life, but could bring equality to these polarized worlds." },
+  { title: 'The Fall', rating: 'R', tmdb_id: 14784,
+    release_date: '9-May-2008', description: "In a hospital on the outskirts of 1920s Los Angeles, an injured stuntman begins to tell a fellow patient, a little girl with a broken arm, a fantastic story about 5 mythical heroes. Thanks to his fractured state of mind and her vivid imagination, the line between fiction and reality starts to blur as the tale advances." },
+  { title: 'Spirited Away', rating: 'PG', tmdb_id: 129,
+    release_date: '30-Sep-2001', description: "As a war between humankind and monstrous sea creatures wages on, a former pilot and a trainee are paired up to drive a seemingly obsolete special weapon in a desperate effort to save the world from the apocalypse." }
 ]
 
 movies.each do |movie|
   Movie.create!(movie)
-end
-
-(1..1000).each do |n|
-
-  Movie.create!(
-    title: "movie #{n}",
-    rating: 'PG-13',
-    release_date: '1-Jan-1990',
-    description: "Seeded movie number #{n}."
-  )
-
 end
 
 moviegoers = [
@@ -66,7 +61,7 @@ moviegoers.each_with_index do |moviegoer, i|
   new_moviegoer = Moviegoer.create!(moviegoer)
 
   # create reviews for some movies for the moviegoer
-  Movie.first(200).sample(100).each do |movie|
+  Movie.all.sample(3).each do |movie|
     review = { potatoes: Review::POTATOES.sample }
     new_moviegoer.reviews << movie.reviews.build(review)
   end
