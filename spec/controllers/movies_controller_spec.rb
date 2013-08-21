@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe MoviesController do
-  before :each do
-    @movie = FactoryGirl.create(:movie)
-  end
+
 
   describe "making a new Movie object" do
     before :each do
+      @movie = FactoryGirl.create(:movie)
       @moviegoer = FactoryGirl.create(:moviegoer)
       Moviegoer.stub(:find_by_id).and_return @moviegoer
     end
@@ -41,6 +40,9 @@ describe MoviesController do
   end
 
   describe "showing a Movie object" do
+    before :each do
+      @movie = FactoryGirl.create(:movie)
+    end
     it "should call the model method that finds the Movie object by id" do
       Movie.should_receive(:find_by_id).with("#{@movie.id}").and_return(@movie)
       get :show, id: @movie.id
@@ -148,7 +150,7 @@ describe MoviesController do
       end
     end
     it "should get all the movies in the movie model" do
-      Movie.stub(:order).and_return @movies
+      Movie.stub(:find).and_return @movies
       get :index
       expect(assigns(:movies)).to match_array(@movies)
     end
