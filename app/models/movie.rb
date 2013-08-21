@@ -3,12 +3,13 @@ class Movie < ActiveRecord::Base
   has_many :moviegoers, through: :reviews
 
   class Movie::InvalidKeyError < StandardError; end
+
   RATINGS = %w[ G PG PG-13 R NC-17 ]
   @@small_base_image_url = "http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185"
   @@large_base_image_url = "http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w370"
   @@grandfathered_date = Time.parse("1 Nov 1968")
-  @@small_filler_image_url = "/assets/no_poster_185.jpg"
-  @@large_filler_image_url = "/assets/no_poster_185.jpg"
+  @@filler_image_url = "/assets/no_poster_185.jpg"
+
   self.per_page = 5
 
   # validations
@@ -31,12 +32,12 @@ class Movie < ActiveRecord::Base
 
   def small_image
     Movie.image_path(self.tmdb_id, @@small_base_image_url,
-                     @@small_filler_image_url)
+                     @@filler_image_url)
   end
 
   def large_image
     Movie.image_path(self.tmdb_id, @@large_base_image_url,
-                     @@large_filler_image_url)
+                     @@filler_image_url)
   end
 
   def self.image_path(tmdb_id, base_path, filler_path)
