@@ -1,4 +1,6 @@
-- movie.reviews.includes(:moviegoer).each do |review|
+- reviews = movie.reviews.paginate(page: params[:page]).includes(:moviegoer)
+= will_paginate reviews
+- reviews.each do |review|
   - cache(review) do
     .media
       .pull-left
@@ -7,3 +9,4 @@
         %h4.media-heading= review.moviegoer.name
         = review.comments
         %em= "#{pluralize(review.potatoes, "potato", "potatoes")}."
+= will_paginate reviews
