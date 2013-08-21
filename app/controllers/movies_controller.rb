@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   before_action :admin_user, only: [:destroy]
 
   def index
-    @movies = Movie.order(:title)
+    @movies = Movie.paginate(page: params[:page]).order(:title)
   end
 
   def show

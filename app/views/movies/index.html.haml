@@ -1,5 +1,5 @@
 .row
-  .col-xs-12.pad-bottom
+  .col-xs-12
     %h2 All Movies
     %table.table.table-hover#movies
       %thead
@@ -10,6 +10,11 @@
       %tbody
         - cache(cache_key_for_movies_table) do
           = render @movies
+.row
+  .col-xs-12
+    = will_paginate @movies
+.row.pad-bottom
+  .col-xs-12
     = link_to "Add new movie", new_movie_path, class: "btn btn-primary"
 .row
   .col-md-6.well

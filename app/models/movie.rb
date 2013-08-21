@@ -9,6 +9,7 @@ class Movie < ActiveRecord::Base
   @@grandfathered_date = Time.parse("1 Nov 1968")
   @@small_filler_image_url = "/assets/no_poster_185.jpg"
   @@large_filler_image_url = "/assets/no_poster_185.jpg"
+  self.per_page = 5
 
   # validations
   validates :title, presence: true
