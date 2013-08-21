@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-  before_filter :find_movie_and_logged_in_user
-  before_filter :find_review, except: [:new, :create]
+  before_action :find_movie_and_logged_in_user
+  before_action :find_review, except: [:new, :create]
 
   def new
     @review = @movie.reviews.build
