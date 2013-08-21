@@ -10,7 +10,7 @@ class Movie < ActiveRecord::Base
   @@grandfathered_date = Time.parse("1 Nov 1968")
   @@filler_image_url = "/assets/no_poster_185.jpg"
 
-  self.per_page = 5
+  self.per_page = 10
 
   # validations
   validates :title, presence: true

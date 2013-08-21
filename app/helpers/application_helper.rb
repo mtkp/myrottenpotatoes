@@ -31,7 +31,7 @@ module ApplicationHelper
       unless page == current_page
         tag(:li, link(page, page, :rel => rel_value(page)))
       else
-        tag(:li, link(page, page, :rel => rel_value(page)), class: "active")
+        tag(:li, tag(:span, page), class: "active")
       end
     end
 
@@ -39,7 +39,7 @@ module ApplicationHelper
       if page
         tag(:li, link(text, page, :class => classname))
       else
-        tag(:li, link(text, page, :class => classname), class: "disabled")
+        tag(:li, tag(:span, text), class: "disabled")
       end
     end
 
