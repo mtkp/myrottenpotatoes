@@ -4,10 +4,10 @@ class Movie < ActiveRecord::Base
 
   class Movie::InvalidKeyError < StandardError; end
   RATINGS = %w[ G PG PG-13 R NC-17 ]
-  @@small_base_image_url = "http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w92"
+  @@small_base_image_url = "http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185"
   @@large_base_image_url = "http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w370"
   @@grandfathered_date = Time.parse("1 Nov 1968")
-  @@small_filler_image_url = "/assets/no_poster_92.jpg"
+  @@small_filler_image_url = "/assets/no_poster_185.jpg"
   @@large_filler_image_url = "/assets/no_poster_185.jpg"
 
   # validations

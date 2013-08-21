@@ -1,5 +1,9 @@
 - movie.reviews.includes(:moviegoer).each do |review|
-  %tr
-    - cache(review) do
-      %td= review.moviegoer.name
-      %td= review.potatoes
+  - cache(review) do
+    .media
+      .pull-left
+        = image_tag(review.moviegoer.profile_pic, class: "media-object img-circle", width: 48, height: 48)
+      .media-body
+        %h4.media-heading= review.moviegoer.name
+        = review.comments
+        %em= "#{pluralize(review.potatoes, "potato", "potatoes")}."

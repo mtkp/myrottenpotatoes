@@ -3,11 +3,17 @@ class Moviegoer < ActiveRecord::Base
   has_many :movies, through: :reviews
 
   def self.find_or_create_from_auth_hash(auth_hash)
-    self.find_or_create_by!(
+    self.create_with(
+      name: auth_hash[:info][:name],
+      image: auth_hash[:info][:image]
+    ).find_or_create_by(
       provider: auth_hash[:provider],
-      uid: auth_hash[:uid],
-      name: auth_hash[:info][:name]
+      uid: auth_hash[:uid]
     )
+  end
+
+  def profile_pic
+    self.image or "/assets/no_profile_pic.jpg"
   end
 
   def review_for(movie)
