@@ -9,7 +9,9 @@ class SessionsController < ApplicationController
     user = Moviegoer.find_or_create_from_auth_hash(auth_hash)
     session[:user_id] = user.id
     flash[:success] = "Logged in successfully!"
-    redirect_to movies_path
+    @auth_hash = auth_hash
+    render 'new'
+    #redirect_to movies_path
   end
 
   def destroy
