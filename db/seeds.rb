@@ -55,6 +55,8 @@ moviegoers = [
   { name: "Zeus" }
 ]
 
+COMMENT = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."
+
 moviegoers.each_with_index do |moviegoer, i|
   moviegoer[:uid] = (1000 + i).to_s
   moviegoer[:provider] = "twitter"
@@ -62,7 +64,7 @@ moviegoers.each_with_index do |moviegoer, i|
 
   # create reviews for some movies for the moviegoer
   Movie.all.sample(3).each do |movie|
-    review = { potatoes: Review::POTATOES.sample }
+    review = { potatoes: Review::POTATOES.sample, comments: COMMENT }
     new_moviegoer.reviews << movie.reviews.build(review)
   end
 end
