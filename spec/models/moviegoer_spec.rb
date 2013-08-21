@@ -30,10 +30,6 @@ describe Moviegoer do
                                uid: @moviegoer[:uid],
                                info: { name: @moviegoer[:name] } }
     end
-    it "should call the find or create by! method for Moviegoer model" do
-      Moviegoer.should_receive(:find_or_create_by!).and_return(@moviegoer)
-      Moviegoer.find_or_create_from_auth_hash(@auth_hash)
-    end
     it "should get the moviegoer if that moviegoer already exists" do
       result = Moviegoer.find_or_create_from_auth_hash(@moviegoer_auth_hash)
       result.should == @moviegoer
