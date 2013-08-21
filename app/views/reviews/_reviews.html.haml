@@ -2,7 +2,7 @@
   - cache(review) do
     .media
       .pull-left
-        = image_tag(review.moviegoer.profile_pic, class: "media-object img-circle", width: 48, height: 48)
+        = image_tag(review.moviegoer.profile_pic, class: "media-object", width: 48, height: 48)
       .media-body
         %h4.media-heading= review.moviegoer.name
         = review.comments
