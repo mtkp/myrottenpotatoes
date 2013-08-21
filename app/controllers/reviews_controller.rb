@@ -39,7 +39,7 @@ private
   end
 
   def review_params
-    params.require(:review).permit(:potatoes)
+    params.require(:review).permit(:potatoes, :comments)
   end
 
   def find_review

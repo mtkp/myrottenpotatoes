@@ -1,3 +1,6 @@
 .form-group
-  = label :reviews, :potatoes, "How many potatoes?"
+  = label :review, :potatoes, "How many potatoes?"
   = select_tag "review[potatoes]", options_for_select(Review::POTATOES, review.potatoes), { class: "form-control"}
+.form-group
+  = label :review, :comments, "Comments"
+  = text_area :review, :comments, rows: 2, class: "form-control"
