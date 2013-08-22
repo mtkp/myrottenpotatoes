@@ -6,8 +6,14 @@
         %tr
           %th Movie Title
           %th Release Date
+          %th
+            .pull-right Add To Rotten Potatoes
       %tbody
         - @movies.each_with_index do |movie, i|
           %tr
             %td= link_to movie.title, "http://www.themoviedb.org/movie/#{movie.id}"
             %td= release_date movie
+            %td
+              = form_tag movies_add_from_tmdb_path do
+                = hidden_field_tag "tmdb_movie_id", movie.id
+                = submit_tag "Add!", class: "btn btn-primary btn-xs pull-right"

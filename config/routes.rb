@@ -4,6 +4,7 @@ Myrottenpotatoes::Application.routes.draw do
     resources :reviews, except: [:index, :show]
   end
   post '/movies/search_tmdb'
+  post '/movies/add_from_tmdb'
 
   # root
   root to: redirect('/movies')
