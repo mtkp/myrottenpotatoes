@@ -49,9 +49,30 @@ class Movie < ActiveRecord::Base
   end
 
   def self.find_in_tmdb(string)
-    self.initialize_tmdb
-    results = TmdbMovie.find(title: string, expand_results: false)
+    results = self.tmdb_movie_find(title: string)
     results.is_a?(Array) ? results : [results]
+  end
+
+  def self.find_or_create_from_tmdb_id(tmdb_id)
+    movie = self.find_by tmdb_id: tmdb_id
+    movie ||= self.create(self.movie_params_from_tmdb_movie_id(tmdb_id))
+  end
+
+private
+
+  def self.api_key
+    ENV["TMDB_API_KEY"]
+  end
+
+  def self.tmdb_movie_find(args)
+    # set defaults
+    args[:expand_results] ||= false
+    args[:language] ||= "en"
+    args[:limit] ||= 30
+
+    # query TMDb
+    Tmdb.api_key = self.api_key # set up api key
+    TmdbMovie.find(args)
   rescue ArgumentError => tmdb_error
     raise Movie::InvalidKeyError, tmdb_error.message
   rescue RuntimeError => tmdb_error
@@ -62,32 +83,16 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  def self.find_or_create_from_tmdb_id(id)
-    movie ||= self.find_by tmdb_id: id
-    return movie if movie
-
-    self.initialize_tmdb
-    tmdb_movie = TmdbMovie.find(id: id, expand_results: true)
-
-    self.create(
-      tmdb_id: id,
+  def self.movie_params_from_tmdb_movie_id(tmdb_id)
+    tmdb_movie = self.tmdb_movie_find(id: tmdb_id, expand_results: true)
+    {
+      tmdb_id: tmdb_id,
       title: tmdb_movie[:title],
       release_date: tmdb_movie[:release_date],
       description: tmdb_movie[:overview],
-      rating: self.tmdb_rating(tmdb_movie)
-    )
-  rescue ArgumentError, RuntimeError => tmdb_error
-    raise Movie::InvalidIDError, tmdb_error.message
-  end
-
-private
-
-  def self.initialize_tmdb
-    Tmdb.api_key = self.api_key
-  end
-
-  def self.api_key
-    ENV["TMDB_API_KEY"]
+      rating: self.tmdb_rating(tmdb_movie),
+      poster_path: tmdb_movie[:poster_path] 
+    }
   end
 
   def self.tmdb_rating(tmdb_movie)
@@ -100,4 +105,5 @@ private
     end
     "NR"
   end
+
 end
