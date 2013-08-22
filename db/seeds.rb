@@ -38,7 +38,7 @@ moviegoers = [
   { name: "Zeus" }
 ]
 
-COMMENT = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat."
+COMMENT = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy."
 
 moviegoers.each_with_index do |moviegoer, i|
   moviegoer[:uid] = (1000 + i).to_s
