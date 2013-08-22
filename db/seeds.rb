@@ -1,7 +1,5 @@
 # Seed the RottenPotatoes DB with some movies.
-tmdb_ids = [ 812, 813, 639, 50014, 85, 27205, 49521, 68726, 68724, 14784, 129 ]
-
-(100..20000).to_a.sample(20).each { |id| tmdb_ids << id }
+tmdb_ids = [ 812, 813, 639, 50014, 85, 27205, 49521, 68726, 68724, 14784, 129, 751 ]
 
 tmdb_ids.each do |tmdb_id|
   begin
@@ -48,7 +46,7 @@ moviegoers.each_with_index do |moviegoer, i|
   new_moviegoer = Moviegoer.create!(moviegoer)
 
   # create reviews for some movies for the moviegoer
-  Movie.all.sample(10).each do |movie|
+  Movie.all.sample(5).each do |movie|
     review = { potatoes: Review::POTATOES.sample, comments: COMMENT }
     new_moviegoer.reviews << movie.reviews.build(review)
   end
