@@ -1,6 +1,6 @@
 .row
   .col-lg-12
-    = link_to image_tag(@movie.small_image, class: "movie-image"), @movie.large_image, class: "pull-right"
+    = link_to image_tag(@movie.small_poster, class: "movie-image"), @movie.large_poster, class: "pull-right"
     .movie-info
       .movie-title= @movie.title
       %div

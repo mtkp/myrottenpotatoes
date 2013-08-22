@@ -32,22 +32,20 @@ class Movie < ActiveRecord::Base
     self.reviews.average(:potatoes).to_f.round(1)
   end
 
-  def small_image
-    Movie.image_path(self.tmdb_id, @@small_base_image_url,
-                     @@filler_image_url)
+  def small_poster
+    if self.poster_path
+      @@small_base_image_url + self.poster_path
+    else
+      @@filler_image_url
+    end
   end
 
-  def large_image
-    Movie.image_path(self.tmdb_id, @@large_base_image_url,
-                     @@filler_image_url)
-  end
-
-  def self.image_path(tmdb_id, base_path, filler_path)
-    self.initialize_tmdb
-    tmdb_movie = TmdbMovie.find(id: tmdb_id, expand_results: false)
-    base_path + tmdb_movie.poster_path
-  rescue ArgumentError, RuntimeError
-    return filler_path
+  def large_poster
+    if self.poster_path
+      @@large_base_image_url + self.poster_path
+    else
+      @@filler_image_url
+    end
   end
 
   def self.find_in_tmdb(string)
