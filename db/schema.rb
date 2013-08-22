@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130821193758) do
+ActiveRecord::Schema.define(version: 20130822011541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20130821193758) do
     t.string   "image"
   end
 
-  add_index "moviegoers", ["name", "uid", "provider"], name: "index_moviegoers_on_name_and_uid_and_provider", using: :btree
+  add_index "moviegoers", ["uid", "provider"], name: "index_moviegoers_on_uid_and_provider", using: :btree
 
   create_table "movies", force: true do |t|
     t.string   "title"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20130821193758) do
   end
 
   add_index "movies", ["title"], name: "index_movies_on_title", using: :btree
+  add_index "movies", ["tmdb_id"], name: "index_movies_on_tmdb_id", using: :btree
 
   create_table "reviews", force: true do |t|
     t.integer  "potatoes"
