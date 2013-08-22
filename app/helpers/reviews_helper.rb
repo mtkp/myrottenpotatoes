@@ -17,10 +17,10 @@ module ReviewsHelper
     end
   end
 
-  def cache_key_for_reviews_table(movie)
+  def cache_key_for_reviews_table(movie, page)
     count          = movie.reviews.count
     max_updated_at = movie.reviews.maximum(:updated_at).try(:utc).try(:to_s, :number)
-    "#{movie.title}/reviews/all-#{count}-#{max_updated_at}"
+    "#{movie.title}/reviews/page-#{page}/#{count}-#{max_updated_at}"
   end
 
 end

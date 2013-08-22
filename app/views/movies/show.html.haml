@@ -22,7 +22,7 @@
     - if @movie.reviews.empty?
       %p This movie has not yet been reviewed.
     - else
-      - cache(cache_key_for_reviews_table(@movie)) do
+      - cache(cache_key_for_reviews_table(@movie, params[:page])) do
         = render 'reviews/reviews', movie: @movie
 
 .row

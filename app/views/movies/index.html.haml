@@ -8,7 +8,7 @@
           %th Rating
           %th Release Date
       %tbody
-        - cache(cache_key_for_movies_table) do
+        - cache(cache_key_for_movies_table(params[:page])) do
           = render @movies
 .row
   .col-xs-12
