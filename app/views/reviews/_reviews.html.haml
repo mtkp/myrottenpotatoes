@@ -1,4 +1,4 @@
-- reviews = movie.reviews.paginate(page: params[:page]).includes(:moviegoer)
+- reviews = movie.reviews.paginate(page: params[:page]).order("updated_at DESC").includes(:moviegoer)
 = will_paginate reviews
 - reviews.each do |review|
   - cache(review) do
