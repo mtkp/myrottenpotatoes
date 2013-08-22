@@ -25,5 +25,10 @@ module WillPaginateHelper
         tag(:li, tag(:span, text), class: "disabled")
       end
     end
+
+    def gap
+      text = @template.will_paginate_translate(:page_gap) { '&hellip;' }
+      tag(:li, tag(:span, text))
+    end
   end
 end
