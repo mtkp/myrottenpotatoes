@@ -12,37 +12,15 @@ module ApplicationHelper
   end
 
   # change the default link renderer for will_paginate
+  # this is taken from the will_paginate Link Renderer wiki.
   def will_paginate(collection_or_options = nil, options = {})
     if collection_or_options.is_a? Hash
       options, collection_or_options = collection_or_options, nil
     end
     unless options[:renderer]
-      options = options.merge :renderer => BootstrapLinkRenderer
+      options = options.merge :renderer => WillPaginateHelper::BootstrapLinkRenderer
     end
     super *[collection_or_options, options].compact
-  end
-
-  class BootstrapLinkRenderer < WillPaginate::ActionView::LinkRenderer
-    def html_container(html)
-      tag(:ul, html, container_attributes)
-    end
-
-    def page_number(page)
-      unless page == current_page
-        tag(:li, link(page, page, rel: rel_value(page)))
-      else
-        tag(:li, tag(:span, page), class: "active")
-      end
-    end
-
-    def previous_or_next_page(page, text, classname)
-      if page
-        tag(:li, link(text, page, class: classname))
-      else
-        tag(:li, tag(:span, text), class: "disabled")
-      end
-    end
-
   end
 
 end
