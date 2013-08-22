@@ -99,7 +99,7 @@ private
     unless tmdb_movie.releases.nil?
       tmdb_movie.releases.each do |release|
         if release[:iso_3166_1] =~ /US/i
-          return release[:certification]
+          return release[:certification] if RATINGS.include? release[:certification]
         end
       end
     end
