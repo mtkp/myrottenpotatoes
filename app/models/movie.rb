@@ -91,9 +91,7 @@ private
   end
 
   def self.tmdb_rating(tmdb_movie)
-    if tmdb_movie.releases.nil?
-      return "NR"
-    else
+    unless tmdb_movie.releases.nil?
       tmdb_movie.releases.each do |release|
         if release[:iso_3166_1] =~ /US/i
           return release[:certification]
