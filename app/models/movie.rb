@@ -68,7 +68,7 @@ private
     # set defaults
     args[:expand_results] ||= false
     args[:language] ||= "en"
-    args[:limit] ||= 30
+    args[:limit] ||= 50
 
     # query TMDb
     Tmdb.api_key = self.api_key # set up api key
