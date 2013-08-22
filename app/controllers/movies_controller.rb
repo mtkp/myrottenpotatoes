@@ -58,10 +58,11 @@ class MoviesController < ApplicationController
   end
 
   def add_from_tmdb
-    @movie = Movie.find_or_create_from_tmdb_id(params[:tmdb_movie_id])
+    @movie = Movie.find_or_create_from_tmdb_id(params[:tmdb_id])
     redirect_to @movie
   rescue Movie::InvalidKeyError
     flash[:danger] = "There was an error with getting the movie from TMDb."
+    flash[:danger] << " No movies were added."
     redirect_to movies_path
   end
 

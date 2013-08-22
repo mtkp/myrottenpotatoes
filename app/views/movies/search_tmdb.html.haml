@@ -15,5 +15,5 @@
             %td= release_date movie
             %td
               = form_tag movies_add_from_tmdb_path do
-                = hidden_field_tag "tmdb_movie_id", movie.id
+                = hidden_field_tag "tmdb_id", movie.id
                 = submit_tag "Add!", class: "btn btn-primary btn-xs pull-right"
