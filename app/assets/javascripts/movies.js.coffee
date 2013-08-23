@@ -6,7 +6,7 @@ RP =
   setup: ->
     # construct new DOM elements
     $('<label for="filter" class="explanation">' +
-      'Restrict to movies suitable for children' +
+      'Restrict page to movies suitable for children' +
       '</label>' +
       '<input type="checkbox" id="filter" />'
     ).insertBefore('#movies').click RP.filter_adult
