@@ -20,8 +20,8 @@
         Want to review a movie but can't find it? Search TMDb for a movie to add.
       = form_tag({ action: :search_tmdb }, { role: "form" }) do
         .form-group
-          %label{ for: "search_terms" } Search Terms
-          = text_field_tag "search_terms", nil, class: "form-control"
+          %label{ for: "tmdb_search_terms" } Search Terms
+          = text_field_tag "tmdb_search_terms", nil, class: "form-control"
         = submit_tag "Search TMDb", class: "btn btn-info"
       .well-divider
         %p Can't find the movie you're looking for in TMDb? Add one yourself.

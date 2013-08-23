@@ -164,19 +164,19 @@ describe MoviesController do
     it "should call the model method that performs TMDb search" do
       Movie.should_receive(:find_in_tmdb).with('hardware').
         and_return(@fake_results)
-      post :search_tmdb, search_terms: 'hardware'
+      post :search_tmdb, tmdb_search_terms: 'hardware'
     end
 
     it "should redirect to the index page if the api key is invalid" do
       Movie.stub(:find_in_tmdb).and_raise(Movie::InvalidKeyError)
-      post :search_tmdb, search_terms: 'hardware'
+      post :search_tmdb, tmdb_search_terms: 'hardware'
       response.should redirect_to(movies_path)
     end
 
     describe "after valid search" do
       before :each do
         Movie.stub(:find_in_tmdb).and_return(@fake_results)
-        post :search_tmdb, search_terms: 'hardware'
+        post :search_tmdb, tmdb_search_terms: 'hardware'
       end
       it "should select the Search Results template for rendering" do
         response.should render_template('search_tmdb')
