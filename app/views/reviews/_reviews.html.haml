@@ -6,7 +6,8 @@
       .pull-left
         = image_tag(review.moviegoer.profile_pic, class: "media-object", width: 48, height: 48)
       .media-body
-        %h4.media-heading= review.moviegoer.name
+        %h4.media-heading
+          = review.moviegoer.name
+          %span{class: review_class(review.potatoes)}= "#{pluralize(review.potatoes, "potato", "potatoes")}"
         = review.comments
-        %em= "#{pluralize(review.potatoes, "potato", "potatoes")}."
 = will_paginate reviews

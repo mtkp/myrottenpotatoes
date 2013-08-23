@@ -61,6 +61,18 @@ label.explanation {
   }
 }
 
+
+/* reviews */
+.media-body .media-heading span {
+  border-radius: 4px;
+  background: #f1f1f1;
+  padding: 4px 6px 4px 6px;
+  position:relative;
+  top: -2px;
+  font-size: .5em;
+  margin-left: 5px;
+}
+
 /* ratings colors */
 .no-rating {
   color: black;
