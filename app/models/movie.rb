@@ -21,28 +21,28 @@ class Movie < ActiveRecord::Base
   validates :rating, inclusion: { in: RATINGS }, unless: :grandfathered?
 
   # methods
-  def grandfathered? ; self.release_date < @@grandfathered_date ; end
+  def grandfathered? ; release_date < @@grandfathered_date ; end
 
   def released_1930_or_later
     errors.add(:release_date, "must be 1930 or later") if
-      self.release_date <= Time.parse("31 Dec 1929")
+      release_date <= Time.parse("31 Dec 1929")
   end
 
   def review_average
-    self.reviews.average(:potatoes).to_f.round(1)
+    reviews.average(:potatoes).to_f.round(1)
   end
 
   def small_poster
-    if self.poster_path
-      @@small_base_image_url + self.poster_path
+    if poster_path
+      @@small_base_image_url + poster_path
     else
       @@filler_image_url
     end
   end
 
   def large_poster
-    if self.poster_path
-      @@large_base_image_url + self.poster_path
+    if poster_path
+      @@large_base_image_url + poster_path
     else
       @@filler_image_url
     end
@@ -50,20 +50,20 @@ class Movie < ActiveRecord::Base
 
   def self.search(string)
     if string && !string.empty?
-      self.where(['lower(title) LIKE ?', "%#{string}%".downcase]).order(:title)
+      where(['lower(title) LIKE ?', "%#{string}%".downcase]).order(:title)
     else
-      self.order(:title)
+      order(:title)
     end
   end
 
   def self.find_in_tmdb(string)
-    results = self.tmdb_movie_find(title: string)
+    results = tmdb_movie_find(title: string)
     results.is_a?(Array) ? results : [results]
   end
 
   def self.find_or_create_from_tmdb_id(tmdb_id)
-    movie = self.find_by tmdb_id: tmdb_id
-    movie ||= self.create(self.movie_params_from_tmdb_movie_id(tmdb_id))
+    movie = find_by tmdb_id: tmdb_id
+    movie ||= create(movie_params_from_tmdb_movie_id(tmdb_id))
   end
 
 private
@@ -79,7 +79,7 @@ private
     args[:limit] ||= 50
 
     # query TMDb
-    Tmdb.api_key = self.api_key # set up api key
+    Tmdb.api_key = api_key # set up api key
     TmdbMovie.find(args)
   rescue ArgumentError => tmdb_error
     raise Movie::InvalidKeyError, tmdb_error.message
@@ -92,13 +92,13 @@ private
   end
 
   def self.movie_params_from_tmdb_movie_id(tmdb_id)
-    tmdb_movie = self.tmdb_movie_find(id: tmdb_id, expand_results: true)
+    tmdb_movie = tmdb_movie_find(id: tmdb_id, expand_results: true)
     {
       tmdb_id: tmdb_id,
       title: tmdb_movie[:title],
       release_date: tmdb_movie[:release_date],
       description: tmdb_movie[:overview],
-      rating: self.tmdb_rating(tmdb_movie),
+      rating: tmdb_rating(tmdb_movie),
       poster_path: tmdb_movie[:poster_path] 
     }
   end
