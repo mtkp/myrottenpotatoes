@@ -26,6 +26,7 @@ module WillPaginateHelper
       end
     end
 
+    # put the gap inside a li tag
     def gap
       text = @template.will_paginate_translate(:page_gap) { '&hellip;' }
       tag(:li, tag(:span, text))
