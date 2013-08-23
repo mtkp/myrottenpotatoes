@@ -48,6 +48,14 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  def self.search(string)
+    if string && !string.empty?
+      self.where(['lower(title) LIKE ?', "%#{string}%".downcase]).order(:title)
+    else
+      self.order(:title)
+    end
+  end
+
   def self.find_in_tmdb(string)
     results = self.tmdb_movie_find(title: string)
     results.is_a?(Array) ? results : [results]
