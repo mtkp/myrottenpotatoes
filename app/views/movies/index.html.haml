@@ -1,6 +1,11 @@
-.row
+.row.pad-bottom
+  = render 'search_form'
   .col-xs-12
-    %h2 All Movies
+    - if params[:search_terms] && !params[:search_terms].empty?
+      %h2 Search Results
+    - else
+      %h2 All Movies
+  .col-xs-12
     %table.table.table-hover#movies
       %thead
         %tr
@@ -10,8 +15,6 @@
       %tbody
         - cache(cache_key_for_movies_table(params[:page])) do
           = render @movies
-.row.pad-bottom
-  .col-xs-12
     = will_paginate @movies
 .row
   .col-md-8.col-lg-6
