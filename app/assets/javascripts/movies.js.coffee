@@ -42,7 +42,7 @@ RP =
     oneFourthWidth = Math.ceil($(window).width() / 4)
     oneFourthHeight = Math.ceil($(window).height() / 4)
     $('#movieInfo').html(data).
-      css({'left': oneFourthWidth, 'width': 2*oneFourthWidth, 'top': oneFourthHeight}).show()
+      css({'left': oneFourthWidth, 'width': 2*oneFourthWidth, 'top': oneFourthHeight, 'z-index': 99}).show()
     $('closeLink').click RP.hideMovieInfo
     return false
 
