@@ -39,9 +39,10 @@ RP =
 
   showMovieInfo: (data) ->
     # center a floater 1/2 as wide and 1/4 as tall as screen
-    oneFourth = Math.ceil($(window).width() / 4)
+    oneFourthWidth = Math.ceil($(window).width() / 4)
+    oneFourthHeight = Math.ceil($(window).height() / 4)
     $('#movieInfo').html(data).
-      css({'left': oneFourth, 'width': 2*oneFourth, 'top': 250}).show()
+      css({'left': oneFourthWidth, 'width': 2*oneFourthWidth, 'top': oneFourthHeight}).show()
     $('closeLink').click RP.hideMovieInfo
     return false
 
