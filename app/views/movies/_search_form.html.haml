@@ -1,6 +1,7 @@
-.col-xs-12
-  = form_tag({ action: :index }, { method: "get", role: "form" }) do
-    .form-group
-      = label_tag :search_terms, "Find movies by title:"
-      = search_field_tag :search_terms, params[:search_terms], class: "form-control"
+= form_tag({ action: :index }, { method: "get", role: "form" }) do
+  .form-group
+    = label_tag :search_terms, "Find movies by title:", class: "sr-only"
+    .col-md-8
+      = search_field_tag :search_terms, params[:search_terms], { class: "form-control", placeholder: "Find movies by title" }
+  .col-md-4
     = submit_tag "Search Rotten Potatoes", {name: nil, class: "btn btn-primary"}

@@ -1,5 +1,6 @@
-.row.pad-bottom
+.row
   = render 'search_form'
+.row.pad-bottom
   .col-xs-12
     - if params[:search_terms] && !params[:search_terms].empty?
       %h2 Search Results
