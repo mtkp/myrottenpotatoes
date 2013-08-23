@@ -14,4 +14,4 @@
       %span{class: review_class(average)}= average
     %div
       %strong Description
-      = movie.description
+      = movie.description.truncate(250, separator: /\s/)
