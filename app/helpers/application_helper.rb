@@ -23,4 +23,13 @@ module ApplicationHelper
     super *[collection_or_options, options].compact
   end
 
+  # append a unique string for caching based on the page
+  def page_cache(page)
+    if page
+      "/page-#{page}"
+    else
+      ""
+    end
+  end
+
 end
