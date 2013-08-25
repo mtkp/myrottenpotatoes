@@ -93,6 +93,8 @@ private
 
   def self.movie_params_from_tmdb_movie_id(tmdb_id)
     tmdb_movie = tmdb_movie_find(id: tmdb_id, expand_results: true)
+
+    # return params hash for movie model
     {
       tmdb_id: tmdb_id,
       title: tmdb_movie[:title],
@@ -103,6 +105,7 @@ private
     }
   end
 
+  # retrieval method for getting a tmdb movie's rating (i.e. G, PG, PG-13)
   def self.tmdb_rating(tmdb_movie)
     unless tmdb_movie.releases.nil?
       tmdb_movie.releases.each do |release|
