@@ -1,5 +1,5 @@
 # Seed the RottenPotatoes DB with some movies.
-tmdb_ids = [ 812, 813, 639, 50014, 85, 27205, 49521, 68726, 68724, 14784, 129, 751 ]
+tmdb_ids = [ 812, 813, 639, 50014, 85, 27205, 49521, 68726, 68724, 14784, 129, 751, 11, 1892, 1891 ]
 
 tmdb_ids.each do |tmdb_id|
   begin
