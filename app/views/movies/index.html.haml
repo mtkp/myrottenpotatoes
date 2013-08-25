@@ -14,7 +14,7 @@
           %th Rating
           %th Release Date
       %tbody
-        - cache(cache_key_for_movies_table(params[:page])) do
+        - cache(cache_key_for_movies_table(params[:page], params[:search_terms])) do
           = render @movies
     = will_paginate @movies
 .row
